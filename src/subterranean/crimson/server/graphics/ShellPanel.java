@@ -94,7 +94,7 @@ public class ShellPanel extends JPanel {
 							Logger.add("Running: " + command);
 							String[] output = null;
 							try {
-								output = ClientCommands.shell_run(c, command, shellID);
+								output = ClientCommands.shell_execute(c, command, shellID);
 							} catch (InvalidResponseException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();

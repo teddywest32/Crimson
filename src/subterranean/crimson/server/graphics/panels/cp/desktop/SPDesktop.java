@@ -150,7 +150,7 @@ public class SPDesktop extends CPanel {
 						captureLights.replaceLight(Color.YELLOW, 2);
 						ImageIcon image = null;
 						try {
-							image = ClientCommands.quickScreenshot(cp.c);
+							image = ClientCommands.screenmanager_screenshot(cp.c);
 						} catch (InvalidResponseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

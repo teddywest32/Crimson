@@ -13,7 +13,7 @@ import subterranean.crimson.server.containers.ConnectionProfile;
 import subterranean.crimson.server.graphics.DModule;
 import subterranean.crimson.server.network.Connection;
 import subterranean.crimson.universal.StreamStore;
-import subterranean.crimson.universal.streams.InfoStream;
+import subterranean.crimson.universal.streams.infostream.InfoStream;
 
 public class SystemInformation extends DModule {
 

@@ -71,7 +71,7 @@ public class SPShell extends CPanel {
 				// add a new panel to the tabbed pane
 				ShellPanel sp = null;
 				try {
-					sp = new ShellPanel(ClientCommands.shell_init(cp.c), cp.c);
+					sp = new ShellPanel(ClientCommands.shell_initialize(cp.c), cp.c);
 				} catch (InvalidResponseException e1) {
 					// failed to initialize shell
 					cp.consoleAppend("Failed to initialize a shell");

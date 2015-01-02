@@ -51,22 +51,22 @@ public enum BMN {
 	public static final byte CLIPBOARD_retrieve = -83;
 	public static final byte PROCESSMANAGER_list = -82;
 	public static final byte PROCESSMANAGER_kill = -81;
-	public static final byte STREAM_data = -82;
-	public static final byte STREAMCONTROL_start = -80;
-	public static final byte STREAMCONTROL_stop = -79;
-	public static final byte STREAMCONTROL_pause = -78;
-	public static final byte STREAMCONTROL_resume = -77;
-	public static final byte SCREENMANAGER_screenshot = -76;
-	public static final byte SCREENMANAGER_getScreenList = -75;
-	public static final byte PLUGIN_message = -74;
-	public static final byte PLUGIN_install = -73;
-	public static final byte PROXY_message = -72;
-	public static final byte DISCONNECTION = -71;
-	public static final byte REGISTRY_list = -70;
-	public static final byte REGISTRY_add = -69;
-	public static final byte REGISTRY_delete = -68;
-	public static final byte REGISTRY_edit = -67;
-	public static final byte REGISTRY_pwd = -66;
+	public static final byte STREAM_data = -80;
+	public static final byte STREAMCONTROL_start = -79;
+	public static final byte STREAMCONTROL_stop = -78;
+	public static final byte STREAMCONTROL_pause = -77;
+	public static final byte STREAMCONTROL_resume = -76;
+	public static final byte SCREENMANAGER_screenshot = -75;
+	public static final byte SCREENMANAGER_getScreenList = -74;
+	public static final byte PLUGIN_message = -73;
+	public static final byte PLUGIN_install = -72;
+	public static final byte PROXY_message = -71;
+	public static final byte DISCONNECTION = -70;
+	public static final byte REGISTRY_list = -69;
+	public static final byte REGISTRY_add = -68;
+	public static final byte REGISTRY_delete = -67;
+	public static final byte REGISTRY_edit = -66;
+	public static final byte REGISTRY_pwd = -65;
 	
 
 }
