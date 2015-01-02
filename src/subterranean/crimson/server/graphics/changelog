@@ -1,0 +1,227 @@
+3.0.1
+[Improvement] - Changed Welcome Panel
+[    Fix    ] - Filemanager separation synchronization error
+[  Deletion ] - Disabled translations (for now)
+[    Fix    ] - IllegalStateException when restarting RD
+[Improvement] - Unified downloader and installer
+[    New    ] - Real time listener output checking
+[Improvement] - Using byte descriptors instead of enums
+
+
+
+3.0.0 (There have been many more changes than the following)
+[Improvement] - Removed lengthy JDK search
+[    New    ] - bottom up file search function
+[Improvement] - more error checking to file manager
+[Improvement] - Improved System Information Viewer
+[    Fix    ] - keylogger view desync
+[Improvement] - Settings can be compressed on disk
+[    Fix    ] - Some graphical issues on windows 8
+[Improvement] - Theme now defaults to system theme
+[    New    ] - date randomization to generator
+[Improvement] - Recoded core networking
+[    New    ] - Control panels are now detachable
+[    New    ] - log filters and highlighting
+[Improvement] - Removed multiple file explorers (unneeded)
+[    New    ] - Remote desktop
+[    New    ] - reverse remote desktop viewer
+[Improvement] - Improved native code
+[Improvement] - interface improvements everywhere
+[    New    ] - Keylogger statistics
+[    New    ] - location map
+[    New    ] - more options to client log viewer
+[Improvement] - Using standard data viewers for system information now
+[Improvement] - Improved preview DModule performance
+[Improvement] - Tabs can be removed
+[Improvement] - recoded and unified bootstrapper
+[Improvement] - Refactored client listener dialog
+[Improvement] - Background process area improved
+[    New    ] - Network status indicator
+[Improvement] - New menu icons
+[    Fix    ] - diskstore
+[    New    ] - Console to control panel
+[Improvement] - Increased speed of keylog rendering
+[    New    ] - New connection sound
+[    New    ] - Filemanager icons
+[    New    ] - Messagebox
+
+2.2.6
+[Improvement] - Improved Dmodule framework
+[    New    ] - Added support for generic streams
+[    Fix    ] - Buffer is cleared on update
+[    Fix    ] - Began restoration of applet listeners
+[Improvement] - Some classes are enums now
+
+2.2.5
+[    Fix    ] - Fixed incorrect error when opening plugin store
+[    Fix    ] - Fixed diskstore partially
+[Improvement] - Settings are only external now
+
+2.2.4
+[Improvement] - Removed unused packages
+[    New    ] - Added detail pane module system
+[Improvement] - Improved plugin manager
+[    New    ] - Added loading screen for plugin manager
+[Improvement] - Partitioned some code into services jar
+[    New    ] - Reports are buffered now
+[Improvement] - Poller uses iterator now
+[    Fix    ] - PermaJar reporting is fixed
+[    New    ] - Added isServer directive to platform
+
+2.2.3
+[    Fix    ] - Fixed NPE on port check
+[    Fix    ] - Fixed Diskstore issue
+[Improvement] - Refined plugin market(still needs work)
+[Improvement] - Updated mobile plugin
+[    New    ] - Added framework for mainscreen client details
+[    Fix    ] - Fixed small input bugs
+[Improvement] - Improved generation reports
+[Improvement] - Unified Generators to one superclass
+[    New    ] - Added 2 more plugin fields
+[Improvement] - Decreased ram usage by small amount (Needs more improvement)
+
+2.2.2
+[    Fix    ] - Url changed for error reporting and webserver commands
+[    Fix    ] - Fixed error on generation with internal settings present
+[    Fix    ] - Fixed statuslights on some errors
+[    Fix    ] - Fixed Notification popup synchronization issues
+[    Fix    ] - Fixed Diskstore issue
+[Improvement] - Started breakdown of large graphic classes into smaller ones
+[    Fix    ] - Fixed error reporter
+[    Fix    ] - Added compression area (no impl yet)
+[Improvement] - Improved output
+
+2.2.1
+[    New    ] - Added sliding notifications
+[    New    ] - Added info poller
+[Improvement] - Settings are no longer exclusively stored in memory
+[    New    ] - Added remote chat
+[    New    ] - Added new policy settings panel
+[    New    ] - Created plugin API
+[    New    ] - Plugins can store settings
+[Improvement] - Added license info to every file
+[Improvement] - Ran formatter
+
+2.2.0
+[Improvement] - Divided models and renderers into separate packages
+[    New    ] - Added country name to country column
+[Improvement] - Removed cell highlighting on some tables
+[Improvement] - OK dialogs are no longer resizable
+[Improvement] - Unified reporter
+[    Fix    ] - Fixed bug with UPnP check button
+[    Fix    ] - Fixed error when null is passed to deserializer
+[    Fix    ] - Fixed downloader disclaimer checkbox error
+[    Fix    ] - Saved listeners are now removed correctly
+[Improvement] - Jar writing improved
+[    New    ] - Added information gathering framework
+[    New    ] - Added framework for primordial connection commands
+[    New    ] - Added md5 hash column to transfer table
+[Improvement] - Increased ID domain
+[Improvement] - Improved File information
+[    New    ] - Added icons to file manager
+[    New    ] - Added more file fields
+[Improvement] - Moved "traverse up" button
+[    Fix    ] - Fixed error when client doesnt have a mouse
+[Improvement] - IP geolocation now uses a better service
+[Improvement] - Refactored IP information panel
+[    Fix    ] - Fixed password error after failed login attempt
+[Improvement] - Generate button is now easier to click
+[Improvement] - No more double connections
+[Improvement] - Temp files are deleted more reliably now
+
+2.1.1
+[    Fix    ] - Fixed error when texture theme is reloaded
+[Improvement] - Improved jar date input handling
+[    New    ] - Added name randomizers
+[    New    ] - Added welcome panel
+[    New    ] - Added changelog tab
+[    New    ] - Added a few icons
+[    New    ] - Added a basic file properties viewer
+[    New    ] - Added Payload generation disclaimer
+[    New    ] - Re-added payload downloaders
+[    Fix    ] - Fixed error with window titles in viewer
+[    Fix    ] - Fixed non windows autostart
+[    New    ] - Re-added client updater
+[    Fix    ] - Fixed problem with system messages and settings
+[Improvement] - Reduced temporary file usage for file transfers
+[    New    ] - Added pause/resume for file transfers
+
+2.1.0
+[    Fix    ] - Added checks on client log retrieval
+[    Fix    ] - Keylogger flushes on connect
+[    New    ] - HNT LAN support
+[Improvement] - Payload generator now uses a temp file
+[Improvement] - Bootstrapper now uses temp file
+[Improvement] - Keylogger generates system message on failure
+[    Fix    ] - Execution delay restores correctly
+[    Fix    ] - Autostart restores correctly
+[    Fix    ] - Backup server address and port restore correctly
+[    Fix    ] - Server connects to backup server correctly
+[    Fix    ] - Permajar defaults to traditional connection scheme
+[    Fix    ] - Fixed error with password on encrypted listeners
+[    Fix    ] - Fixed null country code error
+[    Fix    ] - Fixed error where Messages are created with wrong constructor
+[    Fix    ] - Fixed generation error for some invalid paths
+[    New    ] - Added framework for adding new symmetric algorithms
+[    New    ] - Added framework for isosyncronous key changes
+[Improvement] - Redesigned add listener window
+[    New    ] - Added listener upnp support
+[Improvement] - Added more robust listener saving mechanism
+[    Fix    ] - Fixed statistics in add listener menu
+[    New    ] - Added table background
+[    New    ] - System messages are now displayed
+[    Fix    ] - Fixed delay on statuslights in filemanager
+[    Fix    ] - Fixed addressing issue
+[    New    ] - Added UPnP Test to listener dialog
+[    Fix    ] - Fixed total network usage label
+[    Fix    ] - Windows filemanager can go past root
+[    New    ] - Message panel now displays messages
+[    Fix    ] - Power controls work on windows
+[    Fix    ] - Cant press power buttons when disabled anymore
+[    New    ] - Keylogger displays window titles for windows
+[Improvement] - Rewrote uninstaller
+[Improvement] - Rewrote updater
+[    New    ] - Confirmation on uninstallation
+[Improvement] - Created robust script executor
+[Improvement] - Login panel looks better
+[    New    ] - Added restart notice on plugin install
+[Improvement] - Plugins use temp dir for installation
+[    Fix    ] - Fixed fatal when plugin description is missing
+[Improvement] - Centralized Cryptography code
+[    New    ] - Added BLOWFISH Symmetric algorithm
+[    New    ] - Added DES Symmetric algorithm
+[    New    ] - Added TRIPLEDES Symmetric algorithm
+[    New    ] - Added system message on successful payload melt
+[    New    ] - Added framework for specifying ECB/CBC
+
+2.0.2
+[    Fix    ] - Fixed issue with window title not updating correctly
+[    Fix    ] - Fixed error when a path is not specified during generation
+[Improvement] - Reduced location resolution frequency
+[Improvement] - Keylog no longer uses depreciated APIs
+[    Fix    ] - Error when trying to remove connection that never completed
+[    Fix    ] - Clipboard now refreshes correctly
+[    Fix    ] - Connections are now restored properly
+[    New    ] - Added setting to control update notification
+[    New    ] - Added setting to control foreign connection notification
+[    Fix    ] - No longer outputs keystrokes to Crimson error log
+[Improvement] - Improved windows autostart
+[    Fix    ] - Fixed issue with some threads not terminating
+[    Fix    ] - Fixed fatal error on corrupted options
+[    Fix    ] - Fixed issue with initialization on OSX
+[    New    ] - Added messages panel to control panel
+
+2.0.1
+[    Fix    ] - No more fatal errors when listener fails to start
+[    New    ] - Added error checking to jar generator input
+[    Fix    ] - Fixed creation date changer
+[    Fix    ] - Fixed Keylogger security issue
+[    Fix    ] - Fixed concurrent modification error with log
+[    Fix    ] - Fatal error on invalid character receipt
+[    Fix    ] - fatal error when location is unresolvable
+[    New    ] - separate path options for OSX
+[    Fix    ] - error when listener is connected to by another program
+[    Fix    ] - Fatal when the remove listener button doesnt have a target
+[    New    ] - Added contact area
+[    Fix    ] - severe keylogger log error
+[    New    ] - SplashScreen

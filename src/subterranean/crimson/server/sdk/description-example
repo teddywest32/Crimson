@@ -1,0 +1,22 @@
+//REQUIRED PROPERTIES
+plugin-version=<X.X.X version of plugin>
+plugin-name=<name of plugin>
+package-name=<unique package name>(Between 3 and 10 characters)
+startup=<Class implementing Startup>
+
+//OPTIONAL PROPERTIES
+SPFrame=<Class implementing SPFrame>//specify as many panels as you need
+GPFrame=<Class implementing GPFrame>
+CPFrame=<Class implementing CPFrame>
+
+
+//EXAMPLE
+plugin-version=2.0.1
+plugin-name=Example Plugin
+package-name=exp
+startup=ExampleStartup
+
+SPFrame=SettingsPanel
+GPFrame=GeneralPanel
+CPFrame=ControlPanel
+CPFrame=ControlPanel2
