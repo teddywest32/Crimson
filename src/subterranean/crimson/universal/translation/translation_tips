@@ -1,0 +1,6 @@
+TRANSLATION TIPS
+
+[Creating a new Translation]
+- Simply rename the lang_en.properties file to lang_[language code].properties
+- Go through each line and replace the English with the translated text
+- You're done!

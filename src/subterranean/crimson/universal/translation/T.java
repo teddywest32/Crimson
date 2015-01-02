@@ -29,7 +29,6 @@ public class T {
 	private static ResourceBundle translation;
 
 	public static String t(String s) {
-
 		if (translation == null) {
 			loadTranslation("english");
 		}
@@ -37,7 +36,7 @@ public class T {
 		try {
 			return translation.getString(s);
 		} catch (Throwable e) {
-			return "NOT FOUND";
+			return "NO TRANS";
 		}
 
 	}
@@ -52,6 +51,16 @@ public class T {
 		case "deutsch": {
 			Logger.add("Loading German");
 			translation = ResourceBundle.getBundle("subterranean/crimson/universal/translation/lang", Locale.GERMAN);
+			return;
+		}
+		case "french": {
+			Logger.add("Loading German");
+			translation = ResourceBundle.getBundle("subterranean/crimson/universal/translation/lang", Locale.FRENCH);
+			return;
+		}
+		case "nederlands": {
+			Logger.add("Loading German");
+			translation = ResourceBundle.getBundle("subterranean/crimson/universal/translation/lang", new Locale("Dutch", "", "nl"));
 			return;
 		}
 		case "español": {

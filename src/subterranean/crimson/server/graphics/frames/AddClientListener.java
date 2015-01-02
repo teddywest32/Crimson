@@ -134,11 +134,12 @@ public class AddClientListener extends JDialog {
 
 		JPanel info_panel = new JPanel();
 		info_panel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Metadata", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		info_panel.setBounds(12, 78, 254, 147);
+		info_panel.setBounds(12, 78, 254, 165);
 		main_panel.add(info_panel);
 		info_panel.setLayout(null);
 
 		JLabel lblName = new JLabel("Name:");
+		lblName.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblName.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblName.setBounds(9, 20, 58, 16);
 		info_panel.add(lblName);
@@ -164,17 +165,20 @@ public class AddClientListener extends JDialog {
 		port.setColumns(10);
 
 		JLabel lblPort = new JLabel("Port:");
+		lblPort.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblPort.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblPort.setBounds(9, 48, 58, 16);
 		info_panel.add(lblPort);
 
 		chckbxRememberThisListener = new JCheckBox("Remember this Listener");
+		chckbxRememberThisListener.setFont(new Font("Dialog", Font.BOLD, 11));
 		chckbxRememberThisListener.setToolTipText("Remembered listeners will be restored on startup");
 		chckbxRememberThisListener.setBounds(9, 75, 233, 24);
 		info_panel.add(chckbxRememberThisListener);
 		chckbxRememberThisListener.setSelected(true);
 
 		chckbxUpnp = new JCheckBox("Use UPnP");
+		chckbxUpnp.setFont(new Font("Dialog", Font.BOLD, 11));
 		chckbxUpnp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int p = 0;
@@ -216,7 +220,7 @@ public class AddClientListener extends JDialog {
 
 		JPanel testing_panel = new JPanel();
 		testing_panel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Analysis", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		testing_panel.setBounds(12, 237, 434, 107);
+		testing_panel.setBounds(12, 245, 434, 107);
 		main_panel.add(testing_panel);
 		testing_panel.setLayout(null);
 
@@ -279,6 +283,7 @@ public class AddClientListener extends JDialog {
 		testing_panel.add(btnCheckPort);
 
 		btnCheckUpnp = new JButton("Test UPnP");
+		btnCheckUpnp.setFont(new Font("Dialog", Font.BOLD, 11));
 		btnCheckUpnp.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -339,123 +344,159 @@ public class AddClientListener extends JDialog {
 		testing_panel.add(upnpStatus);
 
 		JLabel lblExternalIpAddress = new JLabel("External IP: " + Utilities.getExternalIp());
+		lblExternalIpAddress.setFont(new Font("Dialog", Font.BOLD, 10));
 		lblExternalIpAddress.setBounds(16, 17, 193, 16);
 		testing_panel.add(lblExternalIpAddress);
 
 		JLabel lblIntIp = new JLabel("Internal IP: " + Utilities.getIntenalIp());
+		lblIntIp.setFont(new Font("Dialog", Font.BOLD, 10));
 		lblIntIp.setBounds(221, 17, 213, 16);
 		testing_panel.add(lblIntIp);
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229), 1, true), "Statistics", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(458, 237, 254, 107);
+		panel.setBounds(458, 245, 254, 107);
 		main_panel.add(panel);
 		panel.setLayout(null);
 
 		JLabel lblClientListeners = new JLabel("Listeners: " + Server.listeners.size());
+		lblClientListeners.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblClientListeners.setBounds(12, 22, 100, 15);
 		panel.add(lblClientListeners);
 
 		JLabel lblClients = new JLabel("Clients: " + Server.connections.size());
+		lblClients.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblClients.setBounds(138, 22, 104, 15);
 		panel.add(lblClients);
 
 		JPanel encryption_panel = new JPanel();
 		encryption_panel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Security", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		encryption_panel.setBounds(278, 78, 434, 147);
+		encryption_panel.setBounds(278, 78, 434, 165);
 		main_panel.add(encryption_panel);
 		encryption_panel.setLayout(null);
+		
+		JPanel security_options_panel = new JPanel();
+		security_options_panel.setBorder(new TitledBorder(null, "Options", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		security_options_panel.setBounds(3, 120, 428, 40);
+		encryption_panel.add(security_options_panel);
+				security_options_panel.setLayout(null);
+		
+				final JCheckBox chckbxUseSsl = new JCheckBox("Use SSL");
+				chckbxUseSsl.setFont(new Font("Dialog", Font.BOLD, 11));
+				chckbxUseSsl.setBounds(42, 17, 166, 15);
+				security_options_panel.add(chckbxUseSsl);
+				
+						JCheckBox chckbxNewCheckBox = new JCheckBox("Use Port Knocking");
+						chckbxNewCheckBox.setFont(new Font("Dialog", Font.BOLD, 11));
+						chckbxNewCheckBox.setBounds(213, 17, 154, 15);
+						security_options_panel.add(chckbxNewCheckBox);
+						chckbxNewCheckBox.setEnabled(false);
+						
+						JPanel security_symmetric_panel = new JPanel();
+						security_symmetric_panel.setBorder(new TitledBorder(null, "Symmetric Encryption", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+						security_symmetric_panel.setBounds(3, 15, 428, 68);
+						encryption_panel.add(security_symmetric_panel);
+						security_symmetric_panel.setLayout(null);
+						
+								JLabel lblSymmetric = new JLabel("Algorithm:");
+								lblSymmetric.setFont(new Font("Dialog", Font.BOLD, 11));
+								lblSymmetric.setBounds(7, 17, 114, 15);
+								security_symmetric_panel.add(lblSymmetric);
+								
+										algorithm = new JComboBox();
+										algorithm.setFont(new Font("Dialog", Font.BOLD, 11));
+										algorithm.setBounds(80, 15, 160, 20);
+										security_symmetric_panel.add(algorithm);
+										algorithm.addActionListener(new ActionListener() {
+											public void actionPerformed(ActionEvent arg0) {
+												switch ((EncType) algorithm.getSelectedItem()) {
+												case None: {
+													// disable password and async areas
+													lblPassword.setEnabled(false);
+													passwordField.setEnabled(false);
+													passwordField.setText("");
+													btnView.setEnabled(false);
+													op_mode.setEnabled(false);
+													btnRandomize_1.setEnabled(false);
 
-		lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(15, 57, 80, 16);
-		encryption_panel.add(lblPassword);
-		lblPassword.setEnabled(false);
+													break;
+												}
+												default: {
+													lblPassword.setEnabled(true);
+													passwordField.setEnabled(true);
+													btnRandomize_1.setEnabled(true);
 
-		passwordField = new JPasswordField();
-		passwordField.setBounds(94, 55, 160, 20);
-		encryption_panel.add(passwordField);
-		passwordField.setEnabled(false);
+													btnView.setEnabled(true);
+													op_mode.setEnabled(true);
 
-		btnView = new JButton("View");
-		btnView.setEnabled(false);
-		btnView.setBounds(354, 55, 68, 20);
-		encryption_panel.add(btnView);
+													break;
+												}
 
-		JLabel lblSymmetric = new JLabel("Symmetric Algorithm:");
-		lblSymmetric.setBounds(15, 20, 160, 15);
-		encryption_panel.add(lblSymmetric);
-
-		algorithm = new JComboBox();
-		algorithm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				switch ((EncType) algorithm.getSelectedItem()) {
-				case None: {
-					// disable password and async areas
-					lblPassword.setEnabled(false);
-					passwordField.setEnabled(false);
-					passwordField.setText("");
-					btnView.setEnabled(false);
-					op_mode.setEnabled(false);
-					btnRandomize_1.setEnabled(false);
-
-					break;
-				}
-				default: {
-					lblPassword.setEnabled(true);
-					passwordField.setEnabled(true);
-					btnRandomize_1.setEnabled(true);
-
-					btnView.setEnabled(true);
-					op_mode.setEnabled(true);
-
-					break;
-				}
-
-				}
-			}
-		});
-		algorithm.setModel(new DefaultComboBoxModel(EncType.values()));
-		algorithm.setBounds(180, 15, 178, 24);
-		encryption_panel.add(algorithm);
-
-		op_mode = new JComboBox();
-		op_mode.setEnabled(false);
-		op_mode.setModel(new DefaultComboBoxModel(new String[] { "ECB" }));
-		op_mode.setBounds(370, 15, 52, 24);
-		encryption_panel.add(op_mode);
-
-		final JCheckBox chckbxUseSsl = new JCheckBox("Use SSL Connection");
-		chckbxUseSsl.setBounds(15, 115, 169, 24);
-		encryption_panel.add(chckbxUseSsl);
-
-		JLabel lblAlgorithm = new JLabel("Compression Algorithm:");
-		lblAlgorithm.setEnabled(false);
-		lblAlgorithm.setBounds(15, 94, 169, 15);
-		encryption_panel.add(lblAlgorithm);
-
-		final JComboBox comp_algorithm = new JComboBox();
-		comp_algorithm.setEnabled(false);
-		comp_algorithm.setBounds(187, 90, 150, 24);
-		encryption_panel.add(comp_algorithm);
-
-		btnRandomize_1 = new JButton("Randomize");
-		btnRandomize_1.setEnabled(false);
-		btnRandomize_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (!btnRandomize_1.isEnabled()) {
-					return;
-				}
-				passwordField.setText(Utilities.nameGen(Utilities.rand(8, 25)));
-			}
-		});
-		btnRandomize_1.setFont(new Font("Dialog", Font.BOLD, 9));
-		btnRandomize_1.setBounds(259, 55, 88, 20);
-		encryption_panel.add(btnRandomize_1);
-
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Use Port Knocking");
-		chckbxNewCheckBox.setBounds(213, 116, 213, 23);
-		encryption_panel.add(chckbxNewCheckBox);
-		chckbxNewCheckBox.setEnabled(false);
+												}
+											}
+										});
+										algorithm.setModel(new DefaultComboBoxModel(EncType.values()));
+										
+												op_mode = new JComboBox();
+												op_mode.setFont(new Font("Dialog", Font.BOLD, 11));
+												op_mode.setBounds(252, 15, 62, 20);
+												security_symmetric_panel.add(op_mode);
+												op_mode.setEnabled(false);
+												op_mode.setModel(new DefaultComboBoxModel(new String[] { "ECB" }));
+												
+														btnView = new JButton("View");
+														btnView.setFont(new Font("Dialog", Font.BOLD, 10));
+														btnView.setBounds(252, 40, 62, 20);
+														security_symmetric_panel.add(btnView);
+														btnView.setEnabled(false);
+														
+																btnRandomize_1 = new JButton("Randomize");
+																btnRandomize_1.setBounds(326, 40, 88, 20);
+																security_symmetric_panel.add(btnRandomize_1);
+																btnRandomize_1.setEnabled(false);
+																btnRandomize_1.addActionListener(new ActionListener() {
+																	public void actionPerformed(ActionEvent arg0) {
+																		if (!btnRandomize_1.isEnabled()) {
+																			return;
+																		}
+																		passwordField.setText(Utilities.nameGen(Utilities.rand(8, 25)));
+																	}
+																});
+																btnRandomize_1.setFont(new Font("Dialog", Font.BOLD, 9));
+																
+																		passwordField = new JPasswordField();
+																		passwordField.setBounds(80, 40, 160, 20);
+																		security_symmetric_panel.add(passwordField);
+																		passwordField.setEnabled(false);
+																		
+																				lblPassword = new JLabel("Password:");
+																				lblPassword.setFont(new Font("Dialog", Font.BOLD, 11));
+																				lblPassword.setBounds(7, 41, 80, 16);
+																				security_symmetric_panel.add(lblPassword);
+																				lblPassword.setEnabled(false);
+																				
+																				JButton btnInformation = new JButton("Information");
+																				btnInformation.setMargin(new Insets(2, 4, 2, 4));
+																				btnInformation.setFont(new Font("Dialog", Font.BOLD, 9));
+																				btnInformation.setBounds(326, 15, 88, 20);
+																				security_symmetric_panel.add(btnInformation);
+																				
+																				JPanel panel_1 = new JPanel();
+																				panel_1.setBorder(new TitledBorder(null, "Compression", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+																				panel_1.setBounds(3, 81, 428, 40);
+																				encryption_panel.add(panel_1);
+																				panel_1.setLayout(null);
+																				
+																						JLabel lblAlgorithm = new JLabel("Algorithm:");
+																						lblAlgorithm.setBounds(7, 16, 169, 15);
+																						panel_1.add(lblAlgorithm);
+																						lblAlgorithm.setFont(new Font("Dialog", Font.BOLD, 11));
+																						lblAlgorithm.setEnabled(false);
+																						
+																								final JComboBox comp_algorithm = new JComboBox();
+																								comp_algorithm.setBounds(270, 13, 150, 20);
+																								panel_1.add(comp_algorithm);
+																								comp_algorithm.setEnabled(false);
 
 		btnView.addMouseListener(new MouseAdapter() {
 			@Override
