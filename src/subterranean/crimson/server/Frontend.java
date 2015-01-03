@@ -19,6 +19,7 @@ package subterranean.crimson.server;
  *
  */
 
+import java.awt.HeadlessException;
 import java.io.File;
 
 import javax.swing.UIManager;
@@ -88,7 +89,13 @@ public class Frontend {
 
 		if (Server.getSettings().isShowEULA()) {
 			// show EULA
-			EndUserLicenseAgreement dialog = new EndUserLicenseAgreement(Version.version, true);
+			EndUserLicenseAgreement dialog = null;
+			try {
+				dialog = new EndUserLicenseAgreement(Version.version, true);
+			} catch (HeadlessException e1) {
+				Logger.add(T.t("error-headless"));
+				System.exit(0);
+			}
 			dialog.setLocationRelativeTo(null);
 
 			dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
