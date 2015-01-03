@@ -4,18 +4,20 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JCheckBox;
 import javax.swing.border.TitledBorder;
+
+import subterranean.crimson.universal.streams.filestream.FSParameters;
 
 public class FileTransferConfirm extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 
-	public FileTransferConfirm() {
+	public FileTransferConfirm(FSParameters param) {
 		setTitle("Confirm File Transfer");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());

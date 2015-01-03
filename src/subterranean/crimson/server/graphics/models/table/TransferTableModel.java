@@ -23,14 +23,14 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-import subterranean.crimson.universal.transfer.Transfer;
-import subterranean.crimson.universal.transfer.UploadTransfer;
+import subterranean.crimson.universal.streams.filestream.FileStream;
+import subterranean.crimson.universal.translation.T;
 
 public class TransferTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
-	private String[] headers = { "Type", "MD5 Hash", "Status", "Filename", "Progress" };
-	public ArrayList<Transfer> list = new ArrayList<Transfer>();
+	private String[] headers = { T.t("misc-type"), T.t("misc-sha1"), T.t("misc-status"), T.t("misc-filename"), T.t("misc-transferred"), T.t("misc-progress") };
+	public ArrayList<FileStream> list = new ArrayList<FileStream>();
 
 	@Override
 	public int getColumnCount() {
@@ -49,7 +49,7 @@ public class TransferTableModel extends AbstractTableModel {
 		return headers[col];
 	}
 
-	public void add(Transfer t) {
+	public void add(FileStream t) {
 		list.add(t);
 		this.fireTableDataChanged();
 	}
@@ -61,44 +61,27 @@ public class TransferTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Transfer t = list.get(rowIndex);
-
-		switch (columnIndex) {
-		case (0): {
-			if (t instanceof UploadTransfer) {
-				return "Upload";
+		FileStream t = list.get(rowIndex);
+		String header = headers[columnIndex];
+		if (header.equals(T.t("misc-type"))) {
+			if (t.getFSP().isSender()) {
+				return T.t("misc-upload");
 			} else {
-				return "Download";
+				return T.t("misc-download");
 			}
-
-		}
-		case (1): {
-			return t.sha1;
-
-		}
-		case (2): {
-			return t.status;
-
-		}
-		case (3): {
-			return t.filename;
-
-		}
-		case (4): {
-			// calculate percentage transferred
-			int total = t.containersNeeded;
-			int transferred = t.transferredContainers;
-			float percent = ((float) transferred / (float) total) * 100;
-
-			return "" + (int) percent + " %";
-		}
-		default: {
-			return null;
-
-		}
-
+		} else if (header.equals(T.t("misc-sha1"))) {
+			return t.getFSP().getSHA1();
+		} else if (header.equals(T.t("misc-status"))) {
+			return t.getFSP().getStatus();
+		} else if (header.equals(T.t("misc-filename"))) {
+			return t.getFSP().getSrcFile().getName();
+		} else if (header.equals(T.t("misc-transferred"))) {
+			return "";
+		} else if (header.equals(T.t("misc-progress"))) {
+			return "";
+		} else {
+			return "";
 		}
 
 	}
-
 }

@@ -23,6 +23,7 @@ import subterranean.crimson.server.graphics.frames.MainScreen;
 import subterranean.crimson.server.graphics.models.table.HostTableModel;
 import subterranean.crimson.server.graphics.renderers.table.HostTableRenderer;
 import subterranean.crimson.server.network.Connection;
+import subterranean.crimson.universal.exceptions.NoReplyException;
 
 public class Main extends JPanel {
 
@@ -186,7 +187,11 @@ public class Main extends JPanel {
 
 							new Thread() {
 								public void run() {
-									ClientCommands.client_refresh(selected);
+									try {
+										ClientCommands.client_refresh(selected);
+									} catch (NoReplyException e) {
+										MainScreen.window.addNotification("Failed to refresh");
+									}
 								}
 							}.start();
 

@@ -9,6 +9,7 @@ public class FSParameters extends Parameters {
 	private static final long serialVersionUID = 1L;
 	private File destFile;
 	private File srcFile;
+	private String SHA1;
 	private boolean clientIDLE = false;
 	private boolean serverIDLE = false;
 
@@ -65,6 +66,14 @@ public class FSParameters extends Parameters {
 
 	public void setContainerSize(int containerSize) {
 		this.containerSize = containerSize;
+	}
+
+	public String getSHA1() {
+		return SHA1;
+	}
+
+	public void setSHA1(String s) {
+		SHA1 = s;
 	}
 
 }

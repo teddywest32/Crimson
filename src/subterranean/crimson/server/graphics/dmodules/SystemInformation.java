@@ -13,6 +13,7 @@ import subterranean.crimson.server.containers.ConnectionProfile;
 import subterranean.crimson.server.graphics.DModule;
 import subterranean.crimson.server.network.Connection;
 import subterranean.crimson.universal.StreamStore;
+import subterranean.crimson.universal.streams.infostream.ISParameters;
 import subterranean.crimson.universal.streams.infostream.InfoStream;
 
 public class SystemInformation extends DModule {
@@ -80,9 +81,10 @@ public class SystemInformation extends DModule {
 		if (c != null) {
 			this.cp = c.getProfile();
 			StreamStore.removeStream(streamID);
-			InfoStream ps = new InfoStream(500, true, c);
+			ISParameters param = new ISParameters();
+			
+			InfoStream ps = new InfoStream(param, c);
 			streamID = ps.getStreamID();
-			StreamStore.streams.add(ps);
 			updateGraphics();
 		} else {
 			StreamStore.removeStream(streamID);

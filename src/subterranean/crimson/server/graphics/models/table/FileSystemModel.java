@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.table.AbstractTableModel;
 
-import subterranean.crimson.server.commands.FileCommands;
+import subterranean.crimson.server.commands.ClientCommands;
 import subterranean.crimson.server.network.Connection;
 import subterranean.crimson.universal.FileListing;
 import subterranean.crimson.universal.FileManager;
@@ -132,7 +132,7 @@ public class FileSystemModel extends AbstractTableModel {
 
 		FileListing[] f = null;
 		try {
-			f = FileCommands.list(c);
+			f = ClientCommands.filemanager_list(c);
 		} catch (InvalidResponseException e) {
 			// failed to list
 			f = new FileListing[1];

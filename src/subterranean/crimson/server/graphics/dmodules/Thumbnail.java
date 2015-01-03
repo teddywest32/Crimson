@@ -13,7 +13,7 @@ import subterranean.crimson.server.graphics.panels.mainscreen.Main;
 import subterranean.crimson.server.network.Connection;
 import subterranean.crimson.universal.StreamStore;
 import subterranean.crimson.universal.Utilities;
-import subterranean.crimson.universal.streams.PreviewStream;
+import subterranean.crimson.universal.streams.previewstream.PreviewStream;
 
 public class Thumbnail extends DModule {
 
@@ -45,9 +45,8 @@ public class Thumbnail extends DModule {
 		if (c != null) {
 			this.cp = c.getProfile();
 			StreamStore.removeStream(streamID);
-			PreviewStream ps = new PreviewStream(700, true, Utilities.getDetailWidth(), c);
-			streamID = ps.getStreamID();
-			StreamStore.streams.add(ps);
+//			PreviewStream ps = new PreviewStream(700, true, Utilities.getDetailWidth(), c);
+//			streamID = ps.getStreamID();
 			updateGraphics();
 		} else {
 			StreamStore.removeStream(streamID);

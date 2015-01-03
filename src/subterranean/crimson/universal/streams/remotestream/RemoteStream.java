@@ -1,4 +1,4 @@
-package subterranean.crimson.universal.streams;
+package subterranean.crimson.universal.streams.remotestream;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -15,6 +15,7 @@ import subterranean.crimson.universal.containers.Message;
 import subterranean.crimson.universal.remote.Player;
 import subterranean.crimson.universal.remote.ScreenCapture;
 import subterranean.crimson.universal.remote.robot;
+import subterranean.crimson.universal.streams.Stream;
 
 public class RemoteStream extends Stream {
 
@@ -23,14 +24,13 @@ public class RemoteStream extends Stream {
 	public robot rt = new robot();
 
 	public RemoteStream(long p, boolean i) {
-		super(p, i);
+		super(null);
 		capture = new ScreenCapture(0, 100, 100);
 
 	}
 
 	public RemoteStream(long p, boolean i, Player plr) {
-		super(p, i, plr.c);
-		StreamStore.streams.add(this);
+		super(null, plr.c);
 		player = plr;
 		if (player != null) {
 			ClientCommands.startRemoteStream(plr.c, getStreamID());
@@ -47,7 +47,7 @@ public class RemoteStream extends Stream {
 
 	@Override
 	public void received(Message m) {
-		if (initializer) {
+		if (true) {
 			if (player == null) {
 				// reverse connection
 				// nothing should be received
@@ -77,7 +77,7 @@ public class RemoteStream extends Stream {
 	public void send() {
 		Message m = new Message(Utilities.randId(), BMN.STREAM_data);
 		;
-		if (initializer) {
+		if (true) {
 			if (player == null) {
 
 				m.auxObject = new Object[] { getStreamID(), rt.getChangedScreenBlocks() };

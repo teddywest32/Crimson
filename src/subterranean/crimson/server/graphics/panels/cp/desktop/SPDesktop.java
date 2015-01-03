@@ -46,6 +46,7 @@ import javax.swing.DefaultComboBoxModel;
 
 import subterranean.crimson.universal.remote.Control;
 import subterranean.crimson.universal.remote.Timing;
+import subterranean.crimson.universal.translation.T;
 
 import javax.swing.border.BevelBorder;
 
@@ -150,7 +151,7 @@ public class SPDesktop extends CPanel {
 						captureLights.replaceLight(Color.YELLOW, 2);
 						ImageIcon image = null;
 						try {
-							image = ClientCommands.screenmanager_screenshot(cp.c);
+							image = ClientCommands.screenmanager_screenshot(cp.c, 0);
 						} catch (InvalidResponseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -201,14 +202,14 @@ public class SPDesktop extends CPanel {
 		btnShowChat.setBounds(12, 20, 117, 25);
 		session_control_panel.add(btnShowChat);
 
-		chckbxShowClosemaximizeminimizeButtons = new JCheckBox("Show Close/Maximize/Minimize Buttons");
+		chckbxShowClosemaximizeminimizeButtons = new JCheckBox(T.t("misc-disable_close"));
 		chckbxShowClosemaximizeminimizeButtons.setVisible(false);
 		chckbxShowClosemaximizeminimizeButtons.setSelected(true);
 
-		chckbxShowClosemaximizeminimizeButtons.setBounds(8, 53, 328, 23);
+		chckbxShowClosemaximizeminimizeButtons.setBounds(8, 53, 301, 23);
 		session_control_panel.add(chckbxShowClosemaximizeminimizeButtons);
 
-		lblAlias = new JLabel("Alias:");
+		lblAlias = new JLabel(T.t("misc-alias") + ":");
 		lblAlias.setBounds(12, 121, 49, 15);
 		session_control_panel.add(lblAlias);
 
@@ -233,18 +234,18 @@ public class SPDesktop extends CPanel {
 		btnShowChat.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				ClientCommands.chat_visible(cp.c, chckbxShowClosemaximizeminimizeButtons.isSelected());
+//				ClientCommands.chat_visible(cp.c, chckbxShowClosemaximizeminimizeButtons.isSelected());
 				chatSessionOpen = true;
-				status.setText("OPEN");
+				status.setText("misc-open");
 				refreshChatStatuses();
 			}
 		});
 		btnHideChat.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				ClientCommands.chat_invisible(cp.c);
+//				ClientCommands.chat_invisible(cp.c);
 				chatSessionOpen = false;
-				status.setText("CLOSED");
+				status.setText("misc-close");
 				refreshChatStatuses();
 			}
 		});
@@ -465,21 +466,21 @@ public class SPDesktop extends CPanel {
 	@Override
 	public void changedConnectionState(boolean connected) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void refresh() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deinitialize() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	@Override
 	public String getPanelName() {
 		return "desktop";

@@ -345,7 +345,6 @@ public enum ClientCommands {
 
 	public static void beginTransfer(FSParameters param, Connection c) {
 		FileStream fs = new FileStream(param, c);
-		StreamStore.addStream(fs);
 		fs.start();
 
 	}
@@ -403,7 +402,7 @@ public enum ClientCommands {
 
 	}
 
-	public static void delete(Connection c, String filename) {
+	public static void filemanager_delete(Connection c, String filename) {
 		c.send(new Message(ClientCommands.randId(), BMN.FILEMANAGER_delete, filename));
 	}
 
@@ -411,7 +410,7 @@ public enum ClientCommands {
 		c.send(new Message(ClientCommands.randId(), BMN.FILEMANAGER_down, filename));
 	}
 
-	public static FileListing[] list(Connection c) throws InvalidResponseException {
+	public static FileListing[] filemanager_list(Connection c) throws InvalidResponseException {
 		Message mreq = new Message(ClientCommands.randId(), BMN.FILEMANAGER_list);
 		c.send(mreq);
 		Message mres = c.i.getId(mreq.getStreamID());
@@ -422,7 +421,7 @@ public enum ClientCommands {
 		return (FileListing[]) mres.auxObject[0];
 	}
 
-	public static String pwd(Connection c) throws InvalidResponseException {
+	public static String filemanager_pwd(Connection c) throws InvalidResponseException {
 		Message mreq = new Message(ClientCommands.randId(), BMN.FILEMANAGER_pwd);
 		c.send(mreq);
 		Message mres = c.i.getId(mreq.getStreamID());
@@ -433,7 +432,7 @@ public enum ClientCommands {
 		return (String) mres.auxObject[0];
 	}
 
-	public static void up(Connection c) {
+	public static void filemanager_up(Connection c) {
 		c.send(new Message(ClientCommands.randId(), BMN.FILEMANAGER_up));
 	}
 

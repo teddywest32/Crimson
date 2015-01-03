@@ -14,7 +14,7 @@ import java.util.HashMap;
 import javax.swing.JLabel;
 
 import subterranean.crimson.server.network.Connection;
-import subterranean.crimson.universal.streams.RemoteStream;
+import subterranean.crimson.universal.streams.remotestream.RemoteStream;
 
 public class Player extends JLabel {
 

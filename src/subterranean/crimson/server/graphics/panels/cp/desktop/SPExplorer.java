@@ -16,9 +16,7 @@ import subterranean.crimson.server.commands.ClientCommands;
 import subterranean.crimson.server.graphics.ControlPanel;
 import subterranean.crimson.server.graphics.models.table.TransferTableModel;
 import subterranean.crimson.server.graphics.panels.cp.CPanel;
-import subterranean.crimson.universal.transfer.DownloadTransfer;
-import subterranean.crimson.universal.transfer.Transfer;
-import subterranean.crimson.universal.transfer.UploadTransfer;
+import subterranean.crimson.universal.streams.filestream.FileStream;
 
 public class SPExplorer extends CPanel {
 
@@ -56,7 +54,7 @@ public class SPExplorer extends CPanel {
 					return;
 				}
 
-				final Transfer t = ttm.list.get(sourceRow);
+				final FileStream t = ttm.list.get(sourceRow);
 
 				if (e.getButton() == java.awt.event.MouseEvent.BUTTON3) {// right
 																			// click
@@ -78,15 +76,6 @@ public class SPExplorer extends CPanel {
 						@Override
 						public void mousePressed(MouseEvent e) {
 							// pause the transfer
-							if (t instanceof UploadTransfer) {
-								UploadTransfer ut = (UploadTransfer) t;
-								ut.pause();
-								ClientCommands.transfer_pause(cp.c, t.transferId);
-							} else {
-								DownloadTransfer dt = (DownloadTransfer) t;
-								ClientCommands.transfer_pause(cp.c, t.transferId);
-								dt.pause();
-							}
 
 						}
 
@@ -98,15 +87,6 @@ public class SPExplorer extends CPanel {
 						@Override
 						public void mousePressed(MouseEvent e) {
 							// resume the transfer
-							if (t instanceof UploadTransfer) {
-								UploadTransfer ut = (UploadTransfer) t;
-								ut.unpause();
-								ClientCommands.transfer_resume(cp.c, t.transferId);
-							} else {
-								DownloadTransfer dt = (DownloadTransfer) t;
-								dt.unpause();
-								ClientCommands.transfer_resume(cp.c, t.transferId);
-							}
 
 						}
 
@@ -118,28 +98,19 @@ public class SPExplorer extends CPanel {
 						@Override
 						public void mousePressed(MouseEvent e) {
 							// stop the transfer
-							if (t instanceof UploadTransfer) {
-								UploadTransfer ut = (UploadTransfer) t;
-								ut.terminate();
-								ClientCommands.transfer_terminate(cp.c, t.transferId);
-							} else {
-								DownloadTransfer dt = (DownloadTransfer) t;
-								dt.terminate();
-								ClientCommands.transfer_terminate(cp.c, t.transferId);
-							}
 
 						}
 
 					});
 
-					if (t.status.equals("PAUSED")) {
+					if (t.getFSP().getStatus().equals("PAUSED")) {
 						// display resume
 						popup.add(resume);
 						popup.add(terminate);
-					} else if (t.status.equals("RUNNING")) {
+					} else if (t.getFSP().getStatus().equals("RUNNING")) {
 						popup.add(pause);
 						popup.add(terminate);
-					} else if (t.status.equals("COMPLETED")) {
+					} else if (t.getFSP().getStatus().equals("COMPLETED")) {
 						// completed
 
 					}
@@ -158,21 +129,21 @@ public class SPExplorer extends CPanel {
 	@Override
 	public void changedConnectionState(boolean connected) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void refresh() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deinitialize() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	@Override
 	public String getPanelName() {
 		return "explorers";
