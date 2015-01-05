@@ -312,6 +312,7 @@ public class MainScreen extends JFrame {
 		mnGenerate.add(mnExe);
 
 		JMenuItem mntmInstaller = new JMenuItem(T.t("menu-installer"));
+		mntmInstaller.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + mntmInstaller.getText().charAt(0)).toUpperCase() + ".png")));
 		mntmInstaller.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

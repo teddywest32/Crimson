@@ -349,8 +349,9 @@ public class AddClientListener extends JDialog {
 		testing_panel.add(lblExternalIpAddress);
 
 		JLabel lblIntIp = new JLabel("Internal IP: " + Utilities.getIntenalIp());
+		lblIntIp.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblIntIp.setFont(new Font("Dialog", Font.BOLD, 10));
-		lblIntIp.setBounds(221, 17, 213, 16);
+		lblIntIp.setBounds(221, 17, 201, 16);
 		testing_panel.add(lblIntIp);
 
 		JPanel panel = new JPanel();
@@ -376,7 +377,7 @@ public class AddClientListener extends JDialog {
 		encryption_panel.setLayout(null);
 		
 		JPanel security_options_panel = new JPanel();
-		security_options_panel.setBorder(new TitledBorder(null, "Options", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		security_options_panel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Options", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		security_options_panel.setBounds(3, 120, 428, 40);
 		encryption_panel.add(security_options_panel);
 				security_options_panel.setLayout(null);
@@ -393,7 +394,7 @@ public class AddClientListener extends JDialog {
 						chckbxNewCheckBox.setEnabled(false);
 						
 						JPanel security_symmetric_panel = new JPanel();
-						security_symmetric_panel.setBorder(new TitledBorder(null, "Symmetric Encryption", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+						security_symmetric_panel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Symmetric Encryption", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 						security_symmetric_panel.setBounds(3, 15, 428, 68);
 						encryption_panel.add(security_symmetric_panel);
 						security_symmetric_panel.setLayout(null);
@@ -482,7 +483,7 @@ public class AddClientListener extends JDialog {
 																				security_symmetric_panel.add(btnInformation);
 																				
 																				JPanel panel_1 = new JPanel();
-																				panel_1.setBorder(new TitledBorder(null, "Compression", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+																				panel_1.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Compression", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 																				panel_1.setBounds(3, 81, 428, 40);
 																				encryption_panel.add(panel_1);
 																				panel_1.setLayout(null);
