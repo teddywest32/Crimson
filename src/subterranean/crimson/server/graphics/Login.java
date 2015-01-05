@@ -266,7 +266,7 @@ public class Login extends JDialog {
 
 							if (result.equals("true")) {
 								// successful login
-								Server.getSettings().setLoggedIn(true);
+								Server.loggedIN = true;
 								Logger.add("LOGGED IN");
 								lblLoginFailed.setText("Logged in!");
 								try {
@@ -281,7 +281,7 @@ public class Login extends JDialog {
 								pm.setVisible(true);
 								return;
 							} else {
-								Server.getSettings().setLoggedIn(false);
+								Server.loggedIN = false;
 
 								Logger.add("LOGIN FAILED");
 								// clear password
@@ -295,7 +295,7 @@ public class Login extends JDialog {
 							}
 
 						}
-						Server.getSettings().setLoggedIn(false);
+						Server.loggedIN = false;
 						Logger.add("LOGIN FAILED");
 						// clear password
 						passwordField.setText("");

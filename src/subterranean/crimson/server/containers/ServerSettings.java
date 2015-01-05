@@ -42,11 +42,6 @@ public class ServerSettings extends Settings {
 	private boolean closeOnTray;
 
 	/**
-	 * Indicates if the user is logged into Crimson
-	 */
-	private boolean loggedIn;
-
-	/**
 	 * Indicates if the eula should be shown on every startup
 	 */
 	private boolean showEULA;
@@ -159,7 +154,6 @@ public class ServerSettings extends Settings {
 	public ServerSettings() {
 		setErrorReporting(true);
 		setCloseOnTray(false);
-		setLoggedIn(false);
 		setShowEULA(true);
 		setShowDetails(true);
 		setRemoveClientonExit(true);
@@ -219,14 +213,6 @@ public class ServerSettings extends Settings {
 
 	public void setCloseOnTray(boolean closeOnTray) {
 		this.closeOnTray = closeOnTray;
-	}
-
-	public boolean isLoggedIn() {
-		return loggedIn;
-	}
-
-	public void setLoggedIn(boolean loggedIn) {
-		this.loggedIn = loggedIn;
 	}
 
 	public boolean isShowEULA() {

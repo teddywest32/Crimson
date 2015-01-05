@@ -77,6 +77,8 @@ public class Server {
 
 	public static Date start;
 
+	public static boolean loggedIN;
+
 	public static void addAppletListener(String name, boolean b, SecretKeySpec key, int accessport) {
 
 		// start listener
@@ -224,9 +226,6 @@ public class Server {
 
 		// Establish an UncaughtException handler first in case something goes wrong
 		Thread.setDefaultUncaughtExceptionHandler(new ServerExceptionHandler());
-
-		// Server must start logged off
-		getSettings().setLoggedIn(false);
 
 		// Establish a shutdown hook
 		Runtime.getRuntime().addShutdownHook(new ServerShutdownHook());

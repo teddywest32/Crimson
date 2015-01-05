@@ -438,7 +438,7 @@ public class MainScreen extends JFrame {
 						}
 
 						// check if logged in
-						if (!Server.getSettings().isLoggedIn()) {
+						if (!Server.loggedIN) {
 							// present user with login dialog
 							Logger.add("Presenting login dialog");
 

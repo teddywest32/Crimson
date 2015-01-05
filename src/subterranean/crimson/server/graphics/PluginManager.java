@@ -141,7 +141,7 @@ public class PluginManager extends JFrame {
 			public void mousePressed(MouseEvent e) {
 				Server.getSettings().setUserEmail("");
 				Server.getSettings().setUserPassword("");
-				Server.getSettings().setLoggedIn(false);
+				Server.loggedIN = false;
 
 				dispose();
 
