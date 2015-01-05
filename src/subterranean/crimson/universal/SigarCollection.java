@@ -22,21 +22,25 @@ package subterranean.crimson.universal;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.hyperic.sigar.Cpu;
+import org.hyperic.sigar.Mem;
+import org.hyperic.sigar.Sigar;
+import org.hyperic.sigar.SigarException;
+
 public class SigarCollection {
-	// private static Sigar sigar = new Sigar();
+	private static Sigar sigar = new Sigar();
 
-	public static Map getCPU() {
-		return null;
+	public static Map getCPUMap() {
 		// processor
-		// Cpu cpu = new Cpu();
+		Cpu cpu = new Cpu();
 
-		// try {
-		// cpu.gather(sigar);
-		// } catch (SigarException e) {
-		// / // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// return cpu.toMap();
+		try {
+			cpu.gather(sigar);
+		} catch (SigarException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cpu.toMap();
 
 	}
 
@@ -66,18 +70,17 @@ public class SigarCollection {
 		// return f.toMap();
 	}
 
-	public static Map<String, String> getMemory() {
-		return null;
+	public static Map<String, String> getMemoryMap() {
 
 		// memory
-		// Mem mem = new Mem();
-		// try {
-		// mem.gather(sigar);
-		// } catch (SigarException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// return mem.toMap();
+		Mem mem = new Mem();
+		try {
+			mem.gather(sigar);
+		} catch (SigarException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mem.toMap();
 	}
 
 	public static Map getNet() {
@@ -109,12 +112,23 @@ public class SigarCollection {
 
 	public static HashMap<String, Map> run() {
 		HashMap<String, Map> i = new HashMap<String, Map>();
-		i.put("memory", getMemory());
-		i.put("cpu", getCPU());
+		i.put("memory", getMemoryMap());
+		i.put("cpu", getCPUMap());
 		i.put("netInfo", getNet());
 		i.put("system", getSystem());
 
 		return i;
+	}
+
+	public static String getMEMUsage() {
+		Mem mem = new Mem();
+		try {
+			mem.gather(sigar);
+		} catch (SigarException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "" + mem.getUsedPercent();
 	}
 
 }

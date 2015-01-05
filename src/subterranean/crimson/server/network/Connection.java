@@ -13,6 +13,7 @@ import subterranean.crimson.server.PrimordialConnectionCommands;
 import subterranean.crimson.server.Server;
 import subterranean.crimson.server.commands.ClientCommands;
 import subterranean.crimson.server.containers.ConnectionProfile;
+import subterranean.crimson.server.containers.StreamData;
 import subterranean.crimson.server.graphics.BackgroundProgressLights;
 import subterranean.crimson.server.graphics.frames.MainScreen;
 import subterranean.crimson.universal.BMN;
@@ -37,6 +38,8 @@ public class Connection extends Thread {
 	public ServerHandler sh;
 	public String rAddress;
 	private Connection parent;
+
+	public StreamData sd = new StreamData();
 
 	public ChannelTrafficShapingHandler g;
 
