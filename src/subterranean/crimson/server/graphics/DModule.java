@@ -29,6 +29,7 @@ public abstract class DModule extends JPanel implements Comparable {
 	private boolean showing = false;
 
 	public byte weight; // -5 <= x <= 5
+	public int period;
 
 	public abstract void changeTarget(Connection c);
 

@@ -71,7 +71,11 @@ public class DetailPane extends JPanel {
 		for (DModule d : modules) {
 			remove(d);
 		}
-		modules = Server.getSettings().getDmoduleMemory().dms;
+		modules.clear();
+		modules.add(Server.getSettings().getDmoduleMemory().netUsage);
+		modules.add(Server.getSettings().getDmoduleMemory().thumbnail);
+		modules.add(Server.getSettings().getDmoduleMemory().sysInfo);
+
 		Collections.sort(modules);
 
 		for (DModule d : modules) {

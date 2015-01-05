@@ -1,23 +1,23 @@
 package subterranean.crimson.server.containers;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
-import subterranean.crimson.server.graphics.DModule;
 import subterranean.crimson.server.graphics.dmodules.NetworkUsage;
+import subterranean.crimson.server.graphics.dmodules.SystemInformation;
+import subterranean.crimson.server.graphics.dmodules.Thumbnail;
 
-public class DModuleMemory implements Serializable{
-
+public class DModuleMemory implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	public ArrayList<DModule> dms = new ArrayList<DModule>();
-	
-	public DModuleMemory(){
-		//add default modules
-		NetworkUsage nu = new NetworkUsage();
-		nu.weight = -5;
-		dms.add(nu);
-		
+	public Thumbnail thumbnail;
+	public SystemInformation sysInfo;
+	public NetworkUsage netUsage;
+
+	public DModuleMemory() {
+		// add default modules
+		netUsage = new NetworkUsage();
+		netUsage.weight = -5;
+
 	}
 
 }

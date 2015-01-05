@@ -76,7 +76,7 @@ public class SystemInformation extends DModule {
 
 	}
 
-	// @Override
+	 @Override
 	public void changeTarget(Connection c) {
 		if (c != null) {
 			this.cp = c.getProfile();
