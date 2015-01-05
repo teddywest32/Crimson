@@ -1,4 +1,4 @@
-3.0.1
+3.1.0
 [Improvement] - Changed Welcome Panel
 [    Fix    ] - Filemanager separation synchronization error
 [  Deletion ] - Disabled translations (for now)
@@ -6,7 +6,7 @@
 [Improvement] - Unified downloader and installer
 [    New    ] - Real time listener output checking
 [Improvement] - Using byte descriptors instead of enums
-
+[    New    ] - known issues tab
 
 
 3.0.0 (There have been many more changes than the following)

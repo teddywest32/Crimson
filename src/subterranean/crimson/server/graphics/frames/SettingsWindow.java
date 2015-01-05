@@ -88,7 +88,6 @@ public class SettingsWindow extends JFrame {
 	private JCheckBox chckbxCloseOnSystem;
 	private JCheckBox chckbxNeverShowNotifications;
 	private JPanel dmodules_panel;
-	private JCheckBox chckbxShowDetailPane;
 	private JPanel button_panel;
 	private JSeparator separator;
 	private JCheckBox chckbxUniqueConnection;
@@ -104,16 +103,6 @@ public class SettingsWindow extends JFrame {
 	private JCheckBox chckbxSIMCode;
 	private JCheckBox chckbxLanguage;
 	private JCheckBox chckbxTimezone;
-	private JTabbedPane tabbedPane_1;
-	private JPanel panel_3;
-	private JPanel panel_6;
-	private JPanel panel_7;
-	private JPanel panel_8;
-	private JPanel panel_12;
-	private JPanel panel_13;
-	private JCheckBox chckbxEnabled_1;
-	private JComboBox comboBox_2;
-	private JLabel label;
 	private JCheckBox chckbxClientId;
 
 	public SettingsWindow() {
@@ -391,77 +380,6 @@ public class SettingsWindow extends JFrame {
 		tabbedPane.addTab("DModules", null, dmodules_panel, null);
 		dmodules_panel.setLayout(new BoxLayout(dmodules_panel, BoxLayout.Y_AXIS));
 
-		JPanel panel_4 = new JPanel();
-		panel_4.setBorder(new TitledBorder(null, "Detail Pane", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		dmodules_panel.add(panel_4);
-		panel_4.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
-		chckbxShowDetailPane = new JCheckBox("Show Detail Pane");
-		chckbxShowDetailPane.setSelected(Server.getSettings().isShowDetails());
-		panel_4.add(chckbxShowDetailPane);
-
-		JPanel panel_5 = new JPanel();
-		panel_5.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "DModules", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		dmodules_panel.add(panel_5);
-		panel_5.setLayout(new BorderLayout(0, 0));
-
-		tabbedPane_1 = new JTabbedPane(JTabbedPane.LEFT);
-		panel_5.add(tabbedPane_1, BorderLayout.CENTER);
-
-		panel_3 = new JPanel();
-		tabbedPane_1.addTab("Desktop Preview", null, panel_3, null);
-		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.Y_AXIS));
-
-		JPanel panel_9 = new JPanel();
-		panel_9.setBorder(new TitledBorder(null, "Status", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.add(panel_9);
-
-		JCheckBox chckbxEnabled = new JCheckBox("Enabled");
-		panel_9.add(chckbxEnabled);
-
-		JPanel panel_10 = new JPanel();
-		panel_10.setBorder(new TitledBorder(null, "Weight", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.add(panel_10);
-
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] { "-5", "-4", "-3", "-2", "-1", "0", "1", "2", "3", "4", "5" }));
-		panel_10.add(comboBox_1);
-
-		JPanel panel_11 = new JPanel();
-		panel_11.setBorder(new TitledBorder(null, "Frequency", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.add(panel_11);
-
-		JSlider slider_1 = new JSlider();
-		slider_1.setPaintLabels(true);
-		panel_11.add(slider_1);
-
-		label = new JLabel("");
-		panel_11.add(label);
-
-		panel_6 = new JPanel();
-		tabbedPane_1.addTab("Network Usage", null, panel_6, null);
-		panel_6.setLayout(new BoxLayout(panel_6, BoxLayout.Y_AXIS));
-
-		panel_12 = new JPanel();
-		panel_12.setBorder(new TitledBorder(null, "Status", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_6.add(panel_12);
-
-		chckbxEnabled_1 = new JCheckBox("Enabled");
-		panel_12.add(chckbxEnabled_1);
-
-		panel_13 = new JPanel();
-		panel_13.setBorder(new TitledBorder(null, "Weight", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_6.add(panel_13);
-
-		comboBox_2 = new JComboBox();
-		panel_13.add(comboBox_2);
-
-		panel_7 = new JPanel();
-		tabbedPane_1.addTab("World Map", null, panel_7, null);
-
-		panel_8 = new JPanel();
-		tabbedPane_1.addTab("Information", null, panel_8, null);
-
 		button_panel = new JPanel();
 		contentPane.add(button_panel, BorderLayout.SOUTH);
 
@@ -492,7 +410,7 @@ public class SettingsWindow extends JFrame {
 				Server.getSettings().getNotePolicy().setConnection_lost(chckbxLostConnection.isSelected());
 				Server.getSettings().setCloseOnTray(chckbxCloseOnSystem.isSelected());
 				Server.getSettings().getNotePolicy().setShowNotes(!chckbxNeverShowNotifications.isSelected());
-				Server.getSettings().setShowDetails(chckbxShowDetailPane.isSelected());
+//				Server.getSettings().setShowDetails(chckbxShowDetailPane.isSelected());
 
 				// reload the list headers
 				ArrayList<String> headers = new ArrayList<String>();

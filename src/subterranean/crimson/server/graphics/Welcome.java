@@ -20,6 +20,7 @@ package subterranean.crimson.server.graphics;
  */
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -37,6 +38,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import subterranean.crimson.universal.Version;
+import java.awt.Dimension;
 
 public class Welcome extends JDialog {
 
@@ -73,6 +75,7 @@ public class Welcome extends JDialog {
 					changelog.add(scrollPane, BorderLayout.CENTER);
 					{
 						JTextArea textArea = new JTextArea();
+						textArea.setEditable(false);
 						scrollPane.setViewportView(textArea);
 						// read the changelog and write it to the pane
 						InputStream in = getClass().getResourceAsStream("changelog");
@@ -83,6 +86,47 @@ public class Welcome extends JDialog {
 						}
 						sc.close();
 						textArea.setText(clog);
+
+					}
+				}
+			}
+			{
+				JPanel known_issues = new JPanel();
+				tabbedPane.addTab("Known Issues", null, known_issues, null);
+				known_issues.setLayout(new BorderLayout(0, 0));
+				{
+					JScrollPane scrollPane = new JScrollPane();
+					known_issues.add(scrollPane, BorderLayout.CENTER);
+					{
+						JTextArea textArea = new JTextArea();
+						textArea.setEditable(false);
+						scrollPane.setViewportView(textArea);
+						// read the known issues and write it to the pane
+						InputStream in = getClass().getResourceAsStream("issues");
+						Scanner sc = new Scanner(in);
+						String clog = "";
+						while (sc.hasNextLine()) {
+							clog += sc.nextLine() + "\n";
+						}
+						sc.close();
+						textArea.setText(clog);
+					}
+				}
+				{
+					JPanel panel = new JPanel();
+					known_issues.add(panel, BorderLayout.NORTH);
+					{
+						StatusLights l = new StatusLights();
+						l.setPreferredSize(new Dimension(9, 26));
+						l.replaceLight(Color.RED, 3);
+						{
+							JLabel lblStablityLevel = new JLabel("Stablity Level:");
+							panel.add(lblStablityLevel);
+						}
+						panel.add(l);
+
+						JLabel lblBad = new JLabel("Not Good");
+						panel.add(lblBad);
 
 					}
 				}
