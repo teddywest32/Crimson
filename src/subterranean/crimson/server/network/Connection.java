@@ -85,9 +85,6 @@ public class Connection extends Thread {
 
 	public void handshake() {
 
-		String waitMessage = T.t("background-connecting") + " " + rAddress;
-		BackgroundProgressLights.start(waitMessage);
-
 		// get stage number
 		int stage = 0;
 		try {
@@ -98,16 +95,19 @@ public class Connection extends Thread {
 		}
 
 		if (stage == 1) {
-			BackgroundProgressLights.secondary("Sending Stage 2");
+			Logger.add("Sending Stage2");
 			ClientCommands.sendStage2(this);
-			BackgroundProgressLights.secondary(waitMessage);
-		} else {
-			try {
-				Thread.sleep(300);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			return;
+		}
+
+		String waitMessage = T.t("background-connecting") + " " + rAddress;
+		BackgroundProgressLights.start(waitMessage);
+
+		try {
+			Thread.sleep(250);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		try {

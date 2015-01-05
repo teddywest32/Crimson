@@ -1,5 +1,7 @@
 package subterranean.crimson.permajar.stage1;
 
+import java.io.File;
+
 import subterranean.crimson.permajar.stage2.Stage2;
 
 /*
@@ -31,6 +33,7 @@ public class PermaJar {
 
 	public static void main(String[] args) {
 		if (isStage2()) {
+			Stage1.loadStage2();
 			Stage2.run(args);
 		} else {
 			Stage1.run(args);
@@ -39,7 +42,10 @@ public class PermaJar {
 	}
 
 	public static boolean isStage2() {
-		return (PermaJar.class.getResourceAsStream("subterranean/crimson/permajar/Stage2.class") != null);
+		// return
+		// (PermaJar.class.getResourceAsStream("subterranean/crimson/permajar/Stage2.class")
+		// != null);
+		return (new File("stage2.jar")).exists();
 	}
 
 }

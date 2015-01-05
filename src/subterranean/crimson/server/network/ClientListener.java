@@ -83,7 +83,7 @@ public final class ClientListener extends Listener {
 					}
 					final ServerHandler sh = new ServerHandler();
 					final ChannelTrafficShapingHandler ctsh = new ChannelTrafficShapingHandler(300);
-					p.addLast(ctsh, new ObjectEncoder(), new ObjectDecoder(ClassResolvers.cacheDisabled(null)), sh);
+					p.addLast(ctsh, new ObjectEncoder(), new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(null)), sh);
 					// spawn a new connection object
 					new Thread(new Runnable() {
 						public void run() {

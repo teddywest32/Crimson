@@ -6,7 +6,6 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 import subterranean.crimson.server.Server;
-import subterranean.crimson.universal.Logger;
 import subterranean.slidinglayout.SLAnimator;
 import subterranean.slidinglayout.SLConfig;
 import subterranean.slidinglayout.SLKeyframe;
@@ -82,7 +81,6 @@ public class ProgressArea extends JPanel {
 			return;
 		}
 
-		Logger.add("Showing Detail");
 		pp.p.setText(s);
 		pp.sl.animate("indeterminate", Color.CYAN, null);
 		if (showingDetail) {
@@ -103,7 +101,7 @@ public class ProgressArea extends JPanel {
 
 	public synchronized void dropDetail() {
 		pp.sl.stopAnimation();
-		pp.p.setText(" Complete!");
+		pp.p.setText(" Finished!");
 		try {
 			Thread.sleep(200);
 		} catch (InterruptedException e) {

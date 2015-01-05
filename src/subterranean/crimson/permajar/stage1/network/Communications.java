@@ -70,7 +70,7 @@ public enum Communications {
 				if (sslCtx != null) {
 					ch.pipeline().addLast(sslCtx.newHandler(ch.alloc(), HOST, PORT));
 				}
-				ch.pipeline().addLast(new ObjectEncoder(), new ObjectDecoder(ClassResolvers.cacheDisabled(null)), handler);
+				ch.pipeline().addLast(new ObjectEncoder(), new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(null)), handler);
 
 			}
 		});

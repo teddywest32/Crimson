@@ -413,41 +413,6 @@ public enum Executor {
 
 			break;
 		}
-		case BMN.CLIENT_stageQuery: {
-			Message mres = new Message(m.getStreamID(), m.getName(), PermaJar.isStage2() ? 2 : 1);
-			Communications.sendHome(mres);
-
-			break;
-		}
-		case BMN.CLIENT_sendStage: {
-
-			String pathToJar = "";
-			// load
-			try {
-				JarFile jarFile = new JarFile(pathToJar);
-				Enumeration e = jarFile.entries();
-
-				URL[] urls = { new URL("jar:file:" + pathToJar + "!/") };
-				URLClassLoader cl = URLClassLoader.newInstance(urls);
-
-				while (e.hasMoreElements()) {
-					JarEntry je = (JarEntry) e.nextElement();
-					if (je.isDirectory() || !je.getName().endsWith(".class")) {
-						continue;
-					}
-					// -6 because of .class
-					String className = je.getName().substring(0, je.getName().length() - 6);
-					className = className.replace('/', '.');
-					Class c = cl.loadClass(className);
-
-				}
-			} catch (ClassNotFoundException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
-		}
-
 		default: {
 			MessageBuffer.addMessage(m);
 		}

@@ -89,11 +89,11 @@ public enum ServerUtilities {
 	}
 
 	public static byte[] loadStage2() {
-		File stage2 = new File(Platform.tempDir + "crimson_stage2.jar");
+		File stage2 = new File(Platform.tempDir + "stage2.jar");
 		if (!stage2.exists()) {
 			File root = Utilities.getTemp();
 			GenerationUtils.writeClasses(Stage2.resources, root, new ArrayList<String>());
-			String[] targets = { "io", "subterranean", "org" };
+			String[] targets = { "subterranean", "org" };
 			try {
 				GenerationUtils.create(stage2.getAbsolutePath(), targets, "", root);
 			} catch (IOException e) {

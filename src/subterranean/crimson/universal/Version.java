@@ -1,5 +1,3 @@
-package subterranean.crimson.universal;
-
 /*
  * 	Crimson Extended Administration Tool
  *  Copyright (C) 2015 Subterranean Security
@@ -19,10 +17,12 @@ package subterranean.crimson.universal;
  *
  */
 
+package subterranean.crimson.universal;
+
 public enum Version {
 	;
 
 	public static final boolean release = false;
-	public static final String version = "3.0.1";
+	public static final String version = "3.1.0";
 
 }

@@ -24,12 +24,11 @@ import java.util.ArrayList;
 import subterranean.crimson.server.graphics.frames.MainScreen;
 
 public class BackgroundProgressLights {
-	public static ArrayList<String> waiting = new ArrayList<String>();// for waiting
-																		// processes
+	public static ArrayList<String> waiting = new ArrayList<String>();
 
 	public static void start(String name) {
 		if (waiting.size() != 0) {
-			// something is already using the progressbar; dont take it over.
+			// something is already using the progressbar
 			waiting.add(name);
 			return;
 		}
@@ -54,11 +53,6 @@ public class BackgroundProgressLights {
 			waiting.remove(s);
 			return;
 		}
-
-	}
-
-	public static void secondary(String s) {
-		MainScreen.window.progressArea.pp.p.setText(" " + s);
 
 	}
 
