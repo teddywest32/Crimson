@@ -38,6 +38,8 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import subterranean.crimson.universal.Version;
+import subterranean.crimson.universal.translation.T;
+
 import java.awt.Dimension;
 
 public class Welcome extends JDialog {
@@ -58,7 +60,7 @@ public class Welcome extends JDialog {
 			contentPanel.add(tabbedPane, BorderLayout.CENTER);
 			{
 				JPanel welcome = new JPanel();
-				tabbedPane.addTab("Welcome!", null, welcome, null);
+				tabbedPane.addTab(T.t("misc-welcome"), null, welcome, null);
 				welcome.setLayout(new BorderLayout(0, 0));
 				{
 					JLabel lblImage = new JLabel("");

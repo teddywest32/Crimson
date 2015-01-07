@@ -69,6 +69,7 @@ import subterranean.crimson.server.graphics.PluginManager;
 import subterranean.crimson.server.graphics.PrimordialCommandsPanel;
 import subterranean.crimson.server.graphics.ProgressArea;
 import subterranean.crimson.server.graphics.StatusLights;
+import subterranean.crimson.server.graphics.Welcome;
 import subterranean.crimson.server.graphics.panels.mainscreen.MainPane;
 import subterranean.crimson.server.network.Connection;
 import subterranean.crimson.universal.Logger;
@@ -582,7 +583,7 @@ public class MainScreen extends JFrame {
 		mntmBroadcastControlPanel.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + mntmBroadcastControlPanel.getText().charAt(0)).toUpperCase() + ".png")));
 		mnSettings.add(mntmBroadcastControlPanel);
 
-		JMenu mnAbout = new JMenu("About");
+		JMenu mnAbout = new JMenu(T.t("menu-about"));
 		mnAbout.setFont(new Font("Dialog", Font.BOLD, 11));
 		menuBar.add(mnAbout);
 
@@ -599,16 +600,6 @@ public class MainScreen extends JFrame {
 		});
 		mnAbout.add(mntmAboutCrimsonRat);
 
-		JMenuItem mntmEula = new JMenuItem("Show EULA");
-		mntmEula.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + mntmEula.getText().charAt(0)).toUpperCase() + ".png")));
-		mntmEula.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				EndUserLicenseAgreement eula = new EndUserLicenseAgreement(Version.version, false);
-				eula.setVisible(true);
-			}
-		});
-
 		JMenuItem mntmLog = new JMenuItem(T.t("menu-log"));
 		mntmLog.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + mntmLog.getText().charAt(0)).toUpperCase() + ".png")));
 		mntmLog.addMouseListener(new MouseAdapter() {
@@ -619,7 +610,6 @@ public class MainScreen extends JFrame {
 			}
 		});
 		mnAbout.add(mntmLog);
-		mnAbout.add(mntmEula);
 
 		JMenuItem mntmLegal = new JMenuItem(T.t("menu-legal"));
 		mntmLegal.addActionListener(new ActionListener() {
@@ -627,17 +617,54 @@ public class MainScreen extends JFrame {
 				addNotification("Under Construction");
 			}
 		});
+		
+				JMenuItem mntmHelpCenter = new JMenuItem(T.t("menu-help_center"));
+				mntmHelpCenter.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						addNotification("Under Construction");
+					}
+				});
+				mntmHelpCenter.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + mntmHelpCenter.getText().charAt(0)).toUpperCase() + ".png")));
+				mnAbout.add(mntmHelpCenter);
 		mntmLegal.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + mntmLegal.getText().charAt(0)).toUpperCase() + ".png")));
 		mnAbout.add(mntmLegal);
 
-		JMenuItem mntmHelpCenter = new JMenuItem(T.t("menu-help_center"));
-		mntmHelpCenter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				addNotification("Under Construction");
+		JMenu mntmEula = new JMenu(T.t("misc-show"));
+		mntmEula.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + mntmEula.getText().charAt(0)).toUpperCase() + ".png")));
+		mntmEula.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+
 			}
 		});
-		mntmHelpCenter.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + mntmHelpCenter.getText().charAt(0)).toUpperCase() + ".png")));
-		mnAbout.add(mntmHelpCenter);
+
+		mnAbout.add(mntmEula);
+
+		JMenuItem mntmE = new JMenuItem("EULA");
+		mntmE.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + mntmE.getText().charAt(0)).toUpperCase() + ".png")));
+		mntmE.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				EndUserLicenseAgreement eula = new EndUserLicenseAgreement(Version.version, false);
+				eula.setVisible(true);
+
+			}
+		});
+
+		mntmEula.add(mntmE);
+
+		JMenuItem mntmW = new JMenuItem(T.t("misc-welcome"));
+		mntmW.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + mntmW.getText().charAt(0)).toUpperCase() + ".png")));
+		mntmW.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Welcome w = new Welcome();
+				w.setVisible(true);
+
+			}
+		});
+
+		mntmEula.add(mntmW);
 
 		progressArea = new ProgressArea();
 		menuBar.add(progressArea);
