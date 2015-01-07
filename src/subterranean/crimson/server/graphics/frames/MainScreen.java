@@ -46,6 +46,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 
+import sl.SLAnimator;
+import sl.SLConfig;
+import sl.SLKeyframe;
+import sl.SLPanel;
+import sl.SLSide;
 import subterranean.crimson.server.Server;
 import subterranean.crimson.server.ServerCommands;
 import subterranean.crimson.server.audio.Sounds;
@@ -70,11 +75,6 @@ import subterranean.crimson.universal.Logger;
 import subterranean.crimson.universal.Version;
 import subterranean.crimson.universal.exceptions.NoReplyException;
 import subterranean.crimson.universal.translation.T;
-import subterranean.slidinglayout.SLAnimator;
-import subterranean.slidinglayout.SLConfig;
-import subterranean.slidinglayout.SLKeyframe;
-import subterranean.slidinglayout.SLPanel;
-import subterranean.slidinglayout.SLSide;
 
 public class MainScreen extends JFrame {
 

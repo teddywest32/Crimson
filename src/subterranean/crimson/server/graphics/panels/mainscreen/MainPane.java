@@ -4,6 +4,11 @@ import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 
+import sl.SLAnimator;
+import sl.SLConfig;
+import sl.SLKeyframe;
+import sl.SLPanel;
+import sl.SLSide;
 import subterranean.crimson.server.Server;
 import subterranean.crimson.server.containers.ConnectionProfile;
 import subterranean.crimson.server.graphics.DModule;
@@ -13,11 +18,6 @@ import subterranean.crimson.server.graphics.dmodules.SystemInformation;
 import subterranean.crimson.server.graphics.dmodules.Thumbnail;
 import subterranean.crimson.server.network.Connection;
 import subterranean.crimson.universal.Logger;
-import subterranean.slidinglayout.SLAnimator;
-import subterranean.slidinglayout.SLConfig;
-import subterranean.slidinglayout.SLKeyframe;
-import subterranean.slidinglayout.SLPanel;
-import subterranean.slidinglayout.SLSide;
 
 public class MainPane extends JPanel {
 

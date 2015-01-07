@@ -27,7 +27,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import subterranean.slidinglayout.SLAnimator;
+import sl.SLAnimator;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 

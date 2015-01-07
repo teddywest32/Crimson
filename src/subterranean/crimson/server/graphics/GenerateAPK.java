@@ -26,13 +26,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import sl.SLAnimator;
+import sl.SLConfig;
+import sl.SLKeyframe;
+import sl.SLPanel;
+import sl.SLSide;
 import subterranean.crimson.server.graphics.panels.generate.apk.Main;
 import subterranean.crimson.universal.Platform;
-import subterranean.slidinglayout.SLAnimator;
-import subterranean.slidinglayout.SLConfig;
-import subterranean.slidinglayout.SLKeyframe;
-import subterranean.slidinglayout.SLPanel;
-import subterranean.slidinglayout.SLSide;
 
 public class GenerateAPK extends JFrame {
 

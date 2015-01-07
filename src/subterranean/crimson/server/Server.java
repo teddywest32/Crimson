@@ -30,6 +30,7 @@ import java.util.Iterator;
 
 import javax.crypto.spec.SecretKeySpec;
 
+import sl.SLAnimator;
 import subterranean.crimson.server.containers.PluginEntry;
 import subterranean.crimson.server.containers.ServerSettings;
 import subterranean.crimson.server.graphics.ControlPanel;
@@ -56,7 +57,6 @@ import subterranean.crimson.universal.exceptions.NoReplyException;
 import subterranean.crimson.universal.objects.InvalidObjectException;
 import subterranean.crimson.universal.objects.ObjectTransfer;
 import subterranean.crimson.universal.translation.T;
-import subterranean.slidinglayout.SLAnimator;
 import aurelienribon.tweenengine.Tween;
 
 public class Server {

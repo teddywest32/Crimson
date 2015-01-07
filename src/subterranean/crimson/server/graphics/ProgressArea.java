@@ -5,12 +5,12 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
+import sl.SLAnimator;
+import sl.SLConfig;
+import sl.SLKeyframe;
+import sl.SLPanel;
+import sl.SLSide;
 import subterranean.crimson.server.Server;
-import subterranean.slidinglayout.SLAnimator;
-import subterranean.slidinglayout.SLConfig;
-import subterranean.slidinglayout.SLKeyframe;
-import subterranean.slidinglayout.SLPanel;
-import subterranean.slidinglayout.SLSide;
 
 public class ProgressArea extends JPanel {
 
