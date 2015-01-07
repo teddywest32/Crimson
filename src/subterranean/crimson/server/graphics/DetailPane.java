@@ -72,9 +72,16 @@ public class DetailPane extends JPanel {
 			remove(d);
 		}
 		modules.clear();
-		modules.add(Server.getSettings().getDmoduleMemory().netUsage);
-		modules.add(Server.getSettings().getDmoduleMemory().thumbnail);
-		modules.add(Server.getSettings().getDmoduleMemory().sysInfo);
+		if (Server.getSettings().getDmoduleMemory().netUsage != null) {
+			modules.add(Server.getSettings().getDmoduleMemory().netUsage);
+		}
+
+		if (Server.getSettings().getDmoduleMemory().thumbnail != null) {
+			modules.add(Server.getSettings().getDmoduleMemory().thumbnail);
+		}
+		if (Server.getSettings().getDmoduleMemory().sysInfo != null) {
+			modules.add(Server.getSettings().getDmoduleMemory().sysInfo);
+		}
 
 		Collections.sort(modules);
 

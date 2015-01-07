@@ -10,7 +10,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
-import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JSlider;

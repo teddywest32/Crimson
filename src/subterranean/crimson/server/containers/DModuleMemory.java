@@ -15,8 +15,8 @@ public class DModuleMemory implements Serializable {
 
 	public DModuleMemory() {
 		// add default modules
-		netUsage = new NetworkUsage();
-		netUsage.weight = -5;
+		sysInfo = new SystemInformation();
+		sysInfo.weight = -5;
 
 	}
 

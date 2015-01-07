@@ -2,6 +2,7 @@ package subterranean.crimson.server.graphics.dmodules;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
@@ -9,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import subterranean.crimson.server.containers.ConnectionProfile;
 import subterranean.crimson.server.graphics.DModule;
 import subterranean.crimson.server.network.Connection;
 import subterranean.crimson.universal.StreamStore;
@@ -19,7 +19,7 @@ import subterranean.crimson.universal.streams.infostream.InfoStream;
 public class SystemInformation extends DModule {
 
 	private static final long serialVersionUID = 1L;
-	ConnectionProfile cp;
+	Connection c;
 	private JLabel lblCpuVAL;
 	private JLabel lblClientIDVAL;
 	private JLabel label_1;
@@ -33,6 +33,7 @@ public class SystemInformation extends DModule {
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel container = new JPanel();
+		container.setMaximumSize(new Dimension(200, 200));
 		add(container);
 		container.setLayout(new GridLayout(0, 2, 0, 0));
 
@@ -62,27 +63,27 @@ public class SystemInformation extends DModule {
 		label_1 = new JLabel("");
 		container.add(label_1);
 
-		if (cp != null) {
+		if (c != null) {
 			updateGraphics();
 		}
 
 	}
 
 	public void updateGraphics() {
-		// lblCpuVAL.setText(cp.info.cpuUsage);
-		// lblClientIDVAL.setText("" + cp.info.clientID);
+		lblCpuVAL.setText(c.sd.cpu);
+		lblClientIDVAL.setText("" + c.clientID);
 		// label_1.setText(cp.info.freeSpace);
-		// label.setText(cp.info.memUsage);
+		label.setText(c.sd.mem);
 
 	}
 
-	 @Override
+	@Override
 	public void changeTarget(Connection c) {
 		if (c != null) {
-			this.cp = c.getProfile();
+			this.c = c;
 			StreamStore.removeStream(streamID);
 			ISParameters param = new ISParameters();
-			
+
 			InfoStream ps = new InfoStream(param, c);
 			streamID = ps.getStreamID();
 			updateGraphics();
@@ -90,9 +91,9 @@ public class SystemInformation extends DModule {
 			StreamStore.removeStream(streamID);
 		}
 	}
-	
-	@Override
+
+	// @Override
 	public int compareTo(Object o) {
-		return (weight - ((DModule)o).weight);
+		return (weight - ((DModule) o).weight);
 	}
 }

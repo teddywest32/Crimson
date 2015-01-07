@@ -100,7 +100,12 @@ public class Connection extends Thread {
 		if (stage == 1) {
 			Logger.add("Sending Stage2");
 			ClientCommands.sendStage2(this);
-			return;
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		String waitMessage = T.t("background-connecting") + " " + rAddress;

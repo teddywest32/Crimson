@@ -11,14 +11,15 @@ import javax.swing.JTabbedPane;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import org.jxmapviewer.JXMapViewer;
+import org.jxmapviewer.OSMTileFactoryInfo;
+import org.jxmapviewer.viewer.DefaultTileFactory;
+import org.jxmapviewer.viewer.GeoPosition;
+import org.jxmapviewer.viewer.TileFactoryInfo;
+
 import subterranean.crimson.server.graphics.ControlPanel;
 import subterranean.crimson.server.graphics.DataViewer;
 import subterranean.crimson.server.graphics.panels.cp.CPanel;
-import subterranean.jxm.jxmapviewer.JXMapViewer;
-import subterranean.jxm.jxmapviewer.OSMTileFactoryInfo;
-import subterranean.jxm.jxmapviewer.viewer.DefaultTileFactory;
-import subterranean.jxm.jxmapviewer.viewer.GeoPosition;
-import subterranean.jxm.jxmapviewer.viewer.TileFactoryInfo;
 
 public class SPLocation extends CPanel {
 

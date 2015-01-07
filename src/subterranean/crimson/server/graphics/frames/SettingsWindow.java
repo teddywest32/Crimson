@@ -50,6 +50,7 @@ import javax.swing.border.TitledBorder;
 import subterranean.crimson.server.Server;
 import subterranean.crimson.server.containers.PluginEntry;
 import subterranean.crimson.server.containers.ServerSettings;
+import subterranean.crimson.server.graphics.panels.settings.SPDModules;
 import subterranean.crimson.server.sdk.interfaces.SPFrame;
 import subterranean.crimson.universal.Logger;
 import subterranean.crimson.universal.translation.T;
@@ -104,6 +105,7 @@ public class SettingsWindow extends JFrame {
 	private JCheckBox chckbxLanguage;
 	private JCheckBox chckbxTimezone;
 	private JCheckBox chckbxClientId;
+	private SPDModules spdmodules;
 
 	public SettingsWindow() {
 
@@ -380,6 +382,9 @@ public class SettingsWindow extends JFrame {
 		tabbedPane.addTab("DModules", null, dmodules_panel, null);
 		dmodules_panel.setLayout(new BoxLayout(dmodules_panel, BoxLayout.Y_AXIS));
 
+		spdmodules = new SPDModules();
+		dmodules_panel.add(spdmodules);
+
 		button_panel = new JPanel();
 		contentPane.add(button_panel, BorderLayout.SOUTH);
 
@@ -399,6 +404,8 @@ public class SettingsWindow extends JFrame {
 		btnSave.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				spdmodules.save();
+
 				Server.getSettings().setErrorReporting(chckbxReportData.isSelected());
 				Server.getSettings().setInformationPanels(chckbxShowInformationPanels.isSelected());
 				Server.getSettings().setTheme((String) themeBox.getSelectedItem());
@@ -410,7 +417,6 @@ public class SettingsWindow extends JFrame {
 				Server.getSettings().getNotePolicy().setConnection_lost(chckbxLostConnection.isSelected());
 				Server.getSettings().setCloseOnTray(chckbxCloseOnSystem.isSelected());
 				Server.getSettings().getNotePolicy().setShowNotes(!chckbxNeverShowNotifications.isSelected());
-//				Server.getSettings().setShowDetails(chckbxShowDetailPane.isSelected());
 
 				// reload the list headers
 				ArrayList<String> headers = new ArrayList<String>();
