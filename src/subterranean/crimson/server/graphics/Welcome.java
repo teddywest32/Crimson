@@ -92,7 +92,7 @@ public class Welcome extends JDialog {
 			}
 			{
 				JPanel known_issues = new JPanel();
-				tabbedPane.addTab("Known Issues", null, known_issues, null);
+				tabbedPane.addTab("Issues", null, known_issues, null);
 				known_issues.setLayout(new BorderLayout(0, 0));
 				{
 					JScrollPane scrollPane = new JScrollPane();
@@ -125,9 +125,40 @@ public class Welcome extends JDialog {
 						}
 						panel.add(l);
 
-						JLabel lblBad = new JLabel("Not Good");
+						JLabel lblBad = new JLabel("Mediocre");
 						panel.add(lblBad);
 
+					}
+				}
+			}
+			{
+				JPanel attribution_panel = new JPanel();
+				tabbedPane.addTab("Attribution", null, attribution_panel, null);
+				attribution_panel.setLayout(new BorderLayout(0, 0));
+				{
+					JPanel panel_1 = new JPanel();
+					attribution_panel.add(panel_1, BorderLayout.NORTH);
+					{
+						JLabel lblMadePossibleIn = new JLabel("Made possible in part by:");
+						panel_1.add(lblMadePossibleIn);
+					}
+				}
+				{
+					JScrollPane scrollPane = new JScrollPane();
+					attribution_panel.add(scrollPane, BorderLayout.CENTER);
+					{
+						JTextArea textArea = new JTextArea();
+						textArea.setEditable(false);
+						scrollPane.setViewportView(textArea);
+						// read the attribution and write it to the pane
+						InputStream in = getClass().getResourceAsStream("attribution");
+						Scanner sc = new Scanner(in);
+						String clog = "";
+						while (sc.hasNextLine()) {
+							clog += sc.nextLine() + "\n";
+						}
+						sc.close();
+						textArea.setText(clog);
 					}
 				}
 			}
