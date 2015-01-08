@@ -532,56 +532,62 @@ public class MainScreen extends JFrame {
 			}
 		});
 		mnSettings.add(mntmLocalSettings);
+		
+		JMenu mnAdvancedFeatures = new JMenu("Advanced Features");
+		mnSettings.add(mnAdvancedFeatures);
+		
+				JMenuItem mntmPrimordialCommands = new JMenuItem(T.t("menu-state_commands"));
+				mnAdvancedFeatures.add(mntmPrimordialCommands);
+				mntmPrimordialCommands.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + mntmPrimordialCommands.getText().charAt(0)).toUpperCase() + ".png")));
+				
+						JMenuItem mntmHistory = new JMenuItem(T.t("menu-history"));
+						mnAdvancedFeatures.add(mntmHistory);
+						mntmHistory.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								addNotification("Under Construction");
+							}
+						});
+						mntmHistory.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + mntmHistory.getText().charAt(0)).toUpperCase() + ".png")));
+						
+								JMenuItem mntmBroadcastControlPanel = new JMenuItem("Broadcast Control Panel");
+								mnAdvancedFeatures.add(mntmBroadcastControlPanel);
+								mntmBroadcastControlPanel.addMouseListener(new MouseAdapter() {
+									@Override
+									public void mousePressed(MouseEvent e) {
+										if (false) {
+											if (Server.wp.isPurchased("adv") || !Version.release) {
 
-		JMenuItem mntmPrimordialCommands = new JMenuItem(T.t("menu-state_commands"));
-		mntmPrimordialCommands.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + mntmPrimordialCommands.getText().charAt(0)).toUpperCase() + ".png")));
-		mntmPrimordialCommands.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
+											} else {
+												MainScreen.window.addNotification("This feature is available in Crimson Advanced Edition");
+											}
+										} else {
+											addNotification("Under Construction");
+										}
+									}
+								});
+								mntmBroadcastControlPanel.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + mntmBroadcastControlPanel.getText().charAt(0)).toUpperCase() + ".png")));
+				mntmPrimordialCommands.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mousePressed(MouseEvent e) {
 
-				if (false) {
-					if (Server.wp.isPurchased("adv") || !Version.release) {
-						// pull up the pcc panel
-						PrimordialCommandsPanel pcp = new PrimordialCommandsPanel();
-						pcp.setLocationRelativeTo(null);
-						pcp.setVisible(true);
-					} else {
-						MainScreen.window.addNotification("This feature is available in Crimson Advanced Edition");
+						if (false) {
+							if (Server.wp.isPurchased("adv") || !Version.release) {
+								// pull up the pcc panel
+								PrimordialCommandsPanel pcp = new PrimordialCommandsPanel();
+								pcp.setLocationRelativeTo(null);
+								pcp.setVisible(true);
+							} else {
+								MainScreen.window.addNotification("This feature is available in Crimson Advanced Edition");
+							}
+						} else {
+							addNotification("Under Construction");
+						}
+
 					}
-				} else {
-					addNotification("Under Construction");
-				}
-
-			}
-		});
-		mnSettings.add(mntmPrimordialCommands);
-
-		JMenuItem mntmHistory = new JMenuItem(T.t("menu-history"));
-		mntmHistory.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				addNotification("Under Construction");
-			}
-		});
-		mntmHistory.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + mntmHistory.getText().charAt(0)).toUpperCase() + ".png")));
-		mnSettings.add(mntmHistory);
-
-		JMenuItem mntmBroadcastControlPanel = new JMenuItem("Broadcast Control Panel");
-		mntmBroadcastControlPanel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (false) {
-					if (Server.wp.isPurchased("adv") || !Version.release) {
-
-					} else {
-						MainScreen.window.addNotification("This feature is available in Crimson Advanced Edition");
-					}
-				} else {
-					addNotification("Under Construction");
-				}
-			}
-		});
-		mntmBroadcastControlPanel.setIcon(new ImageIcon(MainScreen.class.getResource("/subterranean/crimson/server/graphics/icons/menu/" + ("" + mntmBroadcastControlPanel.getText().charAt(0)).toUpperCase() + ".png")));
-		mnSettings.add(mntmBroadcastControlPanel);
+				});
+		
+		JMenu mnExclusiveFeatures = new JMenu("Exclusive Features");
+		mnSettings.add(mnExclusiveFeatures);
 
 		JMenu mnAbout = new JMenu(T.t("menu-about"));
 		mnAbout.setFont(new Font("Dialog", Font.BOLD, 11));
