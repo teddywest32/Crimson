@@ -12,6 +12,7 @@ native hooks - JNativeHook (https://github.com/kwhat/jnativehook) (LGPL/GPL)
 charts - JFreeChart (http://www.jfree.org/jfreechart) (LGPL)
 JCommon (http://www.jfree.org/jcommon/) (LGPL)
 Webserver - NanoHTTPD (https://github.com/NanoHttpd/nanohttpd) (BSD)
+UPNP - weupnp (https://github.com/bitletorg/weupnp) (LGPL)
 
 ##AUDIO##
 connection notification sound - Beep Ping http://freesound.org/people/qubodup/sounds/238995 by Iwan ‘qubodup’ Gabovitch http://freesound.org/people/qubodup under CC-BY 3.0 License http://creativecommons.org/licenses/by/3.0/legalcode
