@@ -17,8 +17,6 @@
  *******************************************************************************/
 package subterranean.crimson.server.graphics;
 
-
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -54,6 +52,7 @@ import subterranean.crimson.server.graphics.panels.cp.desktop.SPShell;
 import subterranean.crimson.server.network.Connection;
 import subterranean.crimson.universal.Logger;
 import subterranean.crimson.universal.Platform;
+import subterranean.crimson.universal.NativeSystem.Family;
 import subterranean.crimson.universal.exceptions.InvalidResponseException;
 import subterranean.crimson.universal.translation.T;
 
@@ -84,9 +83,8 @@ public class DesktopControlPanel extends ControlPanel {
 		setPreferredSize(new Dimension(810, 500));
 		setMinimumSize(new Dimension(810, 500));
 		setBounds(new Rectangle(0, 0, 810, 500));
-		if (!Platform.osx) {
-			setIconImage(Toolkit.getDefaultToolkit().getImage(DesktopControlPanel.class.getResource("/subterranean/crimson/server/graphics/icons/icon.png")));
-		}
+
+		setIconImage(Toolkit.getDefaultToolkit().getImage(DesktopControlPanel.class.getResource("/subterranean/crimson/server/graphics/icons/icon.png")));
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		c = con;
@@ -148,7 +146,7 @@ public class DesktopControlPanel extends ControlPanel {
 			}
 		});
 
-		if (Platform.osx) {
+		if (Platform.os == Family.DARWIN) {
 			// tabs
 			if (Server.getSettings().getDesktopCP().SPMessages) {
 				Logger.add("Loading Messages Panel");

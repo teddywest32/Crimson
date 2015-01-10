@@ -17,8 +17,6 @@
  *******************************************************************************/
 package subterranean.crimson.server.graphics;
 
-
-
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
@@ -74,12 +72,7 @@ public class EndUserLicenseAgreement extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
 		setAlwaysOnTop(true);
-		if (!Platform.osx) {
-			setIconImage(Toolkit.getDefaultToolkit().getImage(EndUserLicenseAgreement.class.getResource("/subterranean/crimson/server/graphics/icons/icon.png")));
-		} else {
-			// OSX is speshul
-
-		}
+		setIconImage(Toolkit.getDefaultToolkit().getImage(EndUserLicenseAgreement.class.getResource("/subterranean/crimson/server/graphics/icons/icon.png")));
 
 		setResizable(false);
 

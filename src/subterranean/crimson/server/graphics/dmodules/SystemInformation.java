@@ -29,7 +29,7 @@ import javax.swing.border.TitledBorder;
 
 import subterranean.crimson.server.graphics.DModule;
 import subterranean.crimson.server.network.Connection;
-import subterranean.crimson.universal.StreamStore;
+import subterranean.crimson.universal.streams.StreamStore;
 import subterranean.crimson.universal.streams.infostream.ISParameters;
 import subterranean.crimson.universal.streams.infostream.InfoStream;
 

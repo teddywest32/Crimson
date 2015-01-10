@@ -28,10 +28,10 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 import subterranean.crimson.universal.Logger;
+import subterranean.crimson.universal.ObjectTransfer;
 import subterranean.crimson.universal.Reporter;
 import subterranean.crimson.universal.containers.Message;
-import subterranean.crimson.universal.objects.InvalidObjectException;
-import subterranean.crimson.universal.objects.ObjectTransfer;
+import subterranean.crimson.universal.exceptions.InvalidObjectException;
 
 //connection to another permajar
 public class ProxyConnection extends Thread {

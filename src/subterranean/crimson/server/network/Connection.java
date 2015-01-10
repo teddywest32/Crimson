@@ -34,11 +34,11 @@ import subterranean.crimson.server.containers.StreamData;
 import subterranean.crimson.server.graphics.BackgroundProgressLights;
 import subterranean.crimson.server.graphics.frames.MainScreen;
 import subterranean.crimson.universal.BMN;
-import subterranean.crimson.universal.EncType;
 import subterranean.crimson.universal.IngressBuffer;
 import subterranean.crimson.universal.Logger;
 import subterranean.crimson.universal.Reporter;
 import subterranean.crimson.universal.containers.Message;
+import subterranean.crimson.universal.enumerations.EncType;
 import subterranean.crimson.universal.exceptions.NoReplyException;
 import subterranean.crimson.universal.translation.T;
 

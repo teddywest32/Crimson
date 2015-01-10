@@ -39,8 +39,8 @@ import java.util.ArrayList;
 import javax.crypto.spec.SecretKeySpec;
 import javax.net.ssl.SSLException;
 
-import subterranean.crimson.universal.EncType;
 import subterranean.crimson.universal.Logger;
+import subterranean.crimson.universal.enumerations.EncType;
 import subterranean.crimson.universal.upnp.PortMapper;
 
 public final class ClientListener extends Listener {

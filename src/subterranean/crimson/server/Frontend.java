@@ -17,8 +17,6 @@
  *******************************************************************************/
 package subterranean.crimson.server;
 
-
-
 import java.awt.HeadlessException;
 import java.io.File;
 
@@ -53,8 +51,7 @@ public class Frontend {
 		}
 
 		// test the tempdir and setup settings
-		File test = new File(Platform.tempDir);
-		if (!test.canRead() || !test.canWrite()) {
+		if (!Platform.tempDir.canRead() || !Platform.tempDir.canWrite()) {
 			NewTempDir ntd = new NewTempDir();
 			ntd.setVisible(true);
 			while (ntd.isVisible()) {

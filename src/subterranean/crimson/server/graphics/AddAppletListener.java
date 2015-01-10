@@ -44,8 +44,8 @@ import javax.swing.border.EtchedBorder;
 
 import subterranean.crimson.server.Server;
 import subterranean.crimson.server.graphics.frames.ListenerManager;
-import subterranean.crimson.universal.PortSpec;
 import subterranean.crimson.universal.Utilities;
+import subterranean.crimson.universal.containers.PortSpec;
 
 public class AddAppletListener extends JDialog {
 

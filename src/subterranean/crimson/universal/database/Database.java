@@ -28,8 +28,8 @@ import java.sql.Statement;
 import java.util.HashMap;
 
 import subterranean.crimson.universal.Logger;
-import subterranean.crimson.universal.objects.InvalidObjectException;
-import subterranean.crimson.universal.objects.ObjectTransfer;
+import subterranean.crimson.universal.ObjectTransfer;
+import subterranean.crimson.universal.exceptions.InvalidObjectException;
 
 public class Database {
 

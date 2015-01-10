@@ -17,8 +17,6 @@
  *******************************************************************************/
 package subterranean.crimson.universal;
 
-
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -125,7 +123,7 @@ public class GenerationUtils {
 		// makes all of these dirs
 		File t = null;
 		for (String s : dirs) {
-			s = path.getAbsolutePath() + Platform.fileSeparator + s;
+			s = path.getAbsolutePath() + File.separator + s;
 			// Logger.add("Making Dir: " + s);
 			new File(s).mkdirs();
 
@@ -145,7 +143,7 @@ public class GenerationUtils {
 
 			InputStream in = GenerationUtils.class.getResourceAsStream("/" + s);
 
-			s = path.getAbsolutePath() + Platform.fileSeparator + s;
+			s = path.getAbsolutePath() + File.separator + s;
 			// try to create the dir if needed
 			File t = new File(s);
 			if (!t.getParentFile().exists()) {

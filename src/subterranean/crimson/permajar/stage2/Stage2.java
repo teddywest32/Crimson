@@ -67,7 +67,7 @@ public class Stage2 {
 			Stage1.loadOptions();
 
 			// Clear out old temp files
-			for (File f : new File(Platform.tempDir).listFiles()) {
+			for (File f : Platform.tempDir.listFiles()) {
 
 				if (f.getName().startsWith("crimson_")) {
 					// delete it
@@ -95,30 +95,60 @@ public class Stage2 {
 
 		// load native utilities
 		try {
-			if (Platform.windows) {
-				if (Platform.jreX64) {
-					Logger.add("Loading: NativeUtilities64.dll");
-					NativeUtilities.load("/subterranean/crimson/universal/natives/NativeUtilities64.dll");
-				} else {
-					Logger.add("Loading: NativeUtilities32.dll");
-					NativeUtilities.load("/subterranean/crimson/universal/natives/NativeUtilities32.dll");
-				}
-			} else if (Platform.linux) {
-				if (Platform.jreX64) {
-					Logger.add("Loading: NativeUtilities64.so");
-					NativeUtilities.load("/subterranean/crimson/universal/natives/NativeUtilities64.so");
-				} else {
-					Logger.add("Loading: NativeUtilities32.so");
-					NativeUtilities.load("/subterranean/crimson/universal/natives/NativeUtilities32.so");
-				}
-			} else {
-				if (Platform.jreX64) {
-					Logger.add("Loading: NativeUtilities64.dylib");
-					NativeUtilities.load("/subterranean/crimson/universal/natives/NativeUtilities64.dylib");
-				} else {
+			switch (Platform.os) {
+			case DARWIN:
+				switch (Platform.arch) {
+				case x86: {
 					Logger.add("Loading: NativeUtilities32.dylib");
 					NativeUtilities.load("/subterranean/crimson/universal/natives/NativeUtilities32.dylib");
+					break;
 				}
+				case x86_64: {
+					Logger.add("Loading: NativeUtilities64.dylib");
+					NativeUtilities.load("/subterranean/crimson/universal/natives/NativeUtilities64.dylib");
+					break;
+				}
+				default:
+					break;
+
+				}
+				break;
+			case WINDOWS:
+				switch (Platform.arch) {
+				case x86: {
+					Logger.add("Loading: NativeUtilities32.dll");
+					NativeUtilities.load("/subterranean/crimson/universal/natives/NativeUtilities32.dll");
+					break;
+				}
+				case x86_64: {
+					Logger.add("Loading: NativeUtilities64.dll");
+					NativeUtilities.load("/subterranean/crimson/universal/natives/NativeUtilities64.dll");
+					break;
+				}
+				default:
+					break;
+
+				}
+				break;
+			default:
+				switch (Platform.arch) {
+				case x86: {
+					Logger.add("Loading: NativeUtilities32.so");
+					NativeUtilities.load("/subterranean/crimson/universal/natives/NativeUtilities32.so");
+					break;
+				}
+				case x86_64: {
+					Logger.add("Loading: NativeUtilities64.so");
+					NativeUtilities.load("/subterranean/crimson/universal/natives/NativeUtilities64.so");
+					break;
+				}
+				default:
+					break;
+
+				}
+
+				break;
+
 			}
 
 		} catch (Throwable e) {

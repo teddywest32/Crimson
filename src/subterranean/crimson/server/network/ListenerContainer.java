@@ -21,8 +21,7 @@ import java.io.Serializable;
 
 import javax.crypto.spec.SecretKeySpec;
 
-import subterranean.crimson.universal.CompressionLevel;
-import subterranean.crimson.universal.EncType;
+import subterranean.crimson.universal.enumerations.EncType;
 
 public class ListenerContainer implements Serializable {
 

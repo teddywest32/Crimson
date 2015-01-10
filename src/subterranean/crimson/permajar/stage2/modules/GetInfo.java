@@ -29,7 +29,6 @@ import subterranean.crimson.permajar.stage2.modules.keylogger.Keylogger;
 import subterranean.crimson.universal.NativeUtilities;
 import subterranean.crimson.universal.Platform;
 import subterranean.crimson.universal.Version;
-import subterranean.crimson.universal.containers.Arch;
 
 public class GetInfo {
 
@@ -45,8 +44,7 @@ public class GetInfo {
 		}
 		info.put("username", System.getProperty("user.name"));
 		info.put("operating_system", System.getProperty("os.name"));
-		info.put("systemArch", Platform.systemX64 ? Arch.x64 : Arch.X86);
-		info.put("jreArch", Platform.jreX64 ? Arch.x64 : Arch.X86);
+		info.put("systemArch", Platform.arch);
 		info.put("os_version", System.getProperty("os.version"));
 		info.put("JREdir", System.getProperty("java.home"));
 		info.put("JREversion", System.getProperty("java.version"));

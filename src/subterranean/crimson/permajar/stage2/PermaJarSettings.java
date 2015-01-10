@@ -36,7 +36,6 @@ public class PermaJarSettings extends Settings {
 	public int newChars;// for keylogger
 
 	public PermaJarSettings() {
-		infoId = 0;
 		errorReporting = true;
 
 		clientID = 0;

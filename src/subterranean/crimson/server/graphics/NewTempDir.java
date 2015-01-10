@@ -98,10 +98,9 @@ public class NewTempDir extends JDialog {
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mousePressed(MouseEvent e) {
-						Platform.tempDir = textField.getText();
+						Platform.tempDir = new File(textField.getText());
 						// check the dir
-						File test = new File(Platform.tempDir);
-						if (!test.canRead() || !test.canWrite()) {
+						if (!Platform.tempDir.canRead() || !Platform.tempDir.canWrite()) {
 							textField.setText("");
 							label.setText("Directory is unreadable or unwritable");
 							return;

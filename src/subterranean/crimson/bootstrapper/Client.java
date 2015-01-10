@@ -39,7 +39,7 @@ import subterranean.crimson.universal.classreference.ClassReference;
 import subterranean.crimson.universal.containers.InstallationDetails;
 import subterranean.crimson.universal.containers.Options;
 import subterranean.crimson.universal.containers.SystemMessage;
-import subterranean.crimson.universal.objects.InvalidObjectException;
+import subterranean.crimson.universal.exceptions.InvalidObjectException;
 import subterranean.crimson.universal.objects.ObjectTransfer;
 
 
@@ -305,7 +305,7 @@ public class Client {
 		GenerationUtils.writeClasses(subterranean.crimson.universal.classreference.Stage1.resources, root, null);
 
 		// copy options
-		File opt = new File(root.getAbsoluteFile() + Platform.fileSeparator + "subterranean/crimson/options");
+		File opt = new File(root.getAbsoluteFile() + File.separator + "subterranean/crimson/options");
 		try {
 			PrintWriter pw = new PrintWriter(opt);
 			pw.println(ObjectTransfer.toString(options, false));

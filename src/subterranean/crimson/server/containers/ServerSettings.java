@@ -158,7 +158,6 @@ public class ServerSettings extends Settings {
 		setShowDetails(true);
 		setRemoveClientonExit(true);
 		setInformationPanels(true);
-		setInfoId(0);
 		setListeners(new ArrayList<String>());
 		setInfoBuffer(new HashSet<Information>());
 		setDesktopCP(new DesktopTabMemory());

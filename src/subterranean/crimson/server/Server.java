@@ -45,17 +45,16 @@ import subterranean.crimson.server.network.Listener;
 import subterranean.crimson.server.network.ListenerContainer;
 import subterranean.crimson.server.sdk.PluginSettings;
 import subterranean.crimson.server.sdk.interfaces.Manifest;
-import subterranean.crimson.universal.CompressionLevel;
-import subterranean.crimson.universal.EncType;
 import subterranean.crimson.universal.Environment;
 import subterranean.crimson.universal.Logger;
+import subterranean.crimson.universal.ObjectTransfer;
 import subterranean.crimson.universal.Platform;
 import subterranean.crimson.universal.Utilities;
 import subterranean.crimson.universal.Version;
 import subterranean.crimson.universal.database.Database;
+import subterranean.crimson.universal.enumerations.EncType;
+import subterranean.crimson.universal.exceptions.InvalidObjectException;
 import subterranean.crimson.universal.exceptions.NoReplyException;
-import subterranean.crimson.universal.objects.InvalidObjectException;
-import subterranean.crimson.universal.objects.ObjectTransfer;
 import subterranean.crimson.universal.translation.T;
 import aurelienribon.tweenengine.Tween;
 
@@ -338,13 +337,6 @@ public class Server {
 			}
 		}).start();
 
-	}
-
-	/**
-	 * This method does nothing. It is called in the platform class to determine if this
-	 * instance is a server or permajar
-	 */
-	public static void probe() {
 	}
 
 	public static void removeListener(int port) {

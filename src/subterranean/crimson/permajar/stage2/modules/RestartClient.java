@@ -17,8 +17,6 @@
  *******************************************************************************/
 package subterranean.crimson.permajar.stage2.modules;
 
-
-
 import java.util.ArrayList;
 
 import subterranean.crimson.universal.DelayedScript;
@@ -31,10 +29,14 @@ public class RestartClient {
 		Logger.add("Restarting client");
 
 		ArrayList<String> script = new ArrayList<String>();
-		if (Platform.windows) {
+		switch (Platform.os) {
+		case WINDOWS:
 			script.add("javaw -jar " + Platform.currentJar.getAbsolutePath());
-		} else {
+			break;
+		default:
 			script.add("java -jar " + Platform.currentJar.getAbsolutePath());
+			break;
+
 		}
 
 		DelayedScript.run(script);

@@ -50,15 +50,14 @@ import javax.swing.JTextField;
 import subterranean.crimson.server.commands.ClientCommands;
 import subterranean.crimson.server.graphics.ControlPanel;
 import subterranean.crimson.server.graphics.FileProperties;
-import subterranean.crimson.server.graphics.FileTransferConfirm;
 import subterranean.crimson.server.graphics.StatusLights;
 import subterranean.crimson.server.graphics.frames.MainScreen;
 import subterranean.crimson.server.graphics.models.table.FileSystemModel;
 import subterranean.crimson.server.graphics.renderers.table.FileSystemRenderer;
 import subterranean.crimson.server.network.Connection;
-import subterranean.crimson.universal.FileListing;
 import subterranean.crimson.universal.GetFileInfo;
 import subterranean.crimson.universal.Logger;
+import subterranean.crimson.universal.containers.FileListing;
 import subterranean.crimson.universal.exceptions.InvalidResponseException;
 
 public class SPExplorerFiles extends JPanel {

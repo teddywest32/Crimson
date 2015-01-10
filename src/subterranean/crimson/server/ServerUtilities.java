@@ -26,6 +26,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 
+import subterranean.crimson.server.graphics.frames.MainScreen;
 import subterranean.crimson.universal.GenerationUtils;
 import subterranean.crimson.universal.Logger;
 import subterranean.crimson.universal.Platform;
@@ -121,6 +122,11 @@ public enum ServerUtilities {
 		}
 
 		return Utilities.readFile(stage2);
+	}
+
+	public static int getDetailWidth() {
+
+		return (int) (((float) 0.2004) * (float) MainScreen.window.getWidth() - (float) 3.636);
 	}
 
 }

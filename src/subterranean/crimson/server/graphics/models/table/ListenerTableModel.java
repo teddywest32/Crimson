@@ -27,9 +27,9 @@ import subterranean.crimson.server.Server;
 import subterranean.crimson.server.network.ClientListener;
 import subterranean.crimson.server.network.ListenerContainer;
 import subterranean.crimson.universal.Logger;
+import subterranean.crimson.universal.ObjectTransfer;
 import subterranean.crimson.universal.Utilities;
-import subterranean.crimson.universal.objects.InvalidObjectException;
-import subterranean.crimson.universal.objects.ObjectTransfer;
+import subterranean.crimson.universal.exceptions.InvalidObjectException;
 
 public class ListenerTableModel extends AbstractTableModel {
 

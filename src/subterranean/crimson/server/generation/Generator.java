@@ -17,18 +17,15 @@
  *******************************************************************************/
 package subterranean.crimson.server.generation;
 
-
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 
 import subterranean.crimson.server.graphics.GenerationReport;
 import subterranean.crimson.server.graphics.frames.MainScreen;
-import subterranean.crimson.universal.Path;
 import subterranean.crimson.universal.Utilities;
 import subterranean.crimson.universal.containers.Options;
 
@@ -39,12 +36,12 @@ public abstract class Generator extends Thread {
 
 	protected void success() {
 		report.add(new String[] { "Outcome", "Success" });
-		report.add(new String[] { "Filesize", new File(outPath.getAbsolutePath()).length() + " bytes" });
-		report.add(new String[] { "MD5", Utilities.getHash(outPath.getAbsolutePath(), "MD5") });
-		report.add(new String[] { "SHA-1", Utilities.getHash(outPath.getAbsolutePath(), "SHA1") });
-		java.nio.file.Path p = Paths.get(outPath.getAbsolutePath());
+		report.add(new String[] { "Filesize", new File(outPath.toString()).length() + " bytes" });
+		report.add(new String[] { "MD5", Utilities.getHash(outPath.toString(), "MD5") });
+		report.add(new String[] { "SHA-1", Utilities.getHash(outPath.toString(), "SHA1") });
+
 		try {
-			BasicFileAttributes attr = Files.readAttributes(p, BasicFileAttributes.class);
+			BasicFileAttributes attr = Files.readAttributes(outPath, BasicFileAttributes.class);
 			report.add(new String[] { "Creation Date", attr.creationTime().toString() });
 			report.add(new String[] { "Last Access Date", attr.lastAccessTime().toString() });
 			report.add(new String[] { "Last Modified Date", attr.lastModifiedTime().toString() });

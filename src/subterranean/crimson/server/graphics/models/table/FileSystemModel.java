@@ -28,9 +28,9 @@ import javax.swing.table.AbstractTableModel;
 
 import subterranean.crimson.server.commands.ClientCommands;
 import subterranean.crimson.server.network.Connection;
-import subterranean.crimson.universal.FileListing;
 import subterranean.crimson.universal.FileManager;
 import subterranean.crimson.universal.FileResolver;
+import subterranean.crimson.universal.containers.FileListing;
 import subterranean.crimson.universal.exceptions.InvalidResponseException;
 
 public class FileSystemModel extends AbstractTableModel {

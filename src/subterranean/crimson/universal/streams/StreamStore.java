@@ -15,71 +15,38 @@
  *      You should have received a copy of the GNU General Public License      *
  *      along with this program.  If not, see http://www.gnu.org/licenses      *
  *******************************************************************************/
-package subterranean.crimson.universal.containers;
+package subterranean.crimson.universal.streams;
 
-import java.io.File;
-import java.io.Serializable;
+
+
 import java.util.ArrayList;
 
+import subterranean.crimson.universal.streams.Stream;
 
+public enum StreamStore {
+	;
+	private static volatile ArrayList<Stream> streams = new ArrayList<Stream>();
 
-public abstract class Settings implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-	protected int infoId;
-	protected boolean errorReporting;
-	protected short errorReportsSent;
-	protected String lang;
-	protected File pluginDir;
-
-	protected ArrayList<Information> reportBuffer = new ArrayList<Information>();
-
-	public void addReport(Information i) {
-		reportBuffer.add(i);
+	public static Stream getStream(int id) {
+		for (Stream s : streams) {
+			if (s.getStreamID() == id) {
+				return s;
+			}
+		}
+		return null;
 	}
 
-	public Information getBufferedReport() {
-		return reportBuffer.remove(0);
+	public static void removeStream(int id) {
+		for (int i = 0; i < streams.size(); i++) {
+			if (streams.get(i).getStreamID() == id) {
+				streams.remove(i).stop();
+				return;
+			}
+		}
 	}
 
-	public int getInfoId() {
-		return infoId;
-	}
-
-	public void setInfoId(int infoId) {
-		this.infoId = infoId;
-	}
-
-	public String getLang() {
-		return lang;
-	}
-
-	public void setLang(String lang) {
-		this.lang = lang;
-	}
-
-	public boolean isErrorReporting() {
-		return errorReporting;
-	}
-
-	public void setErrorReporting(boolean errorReporting) {
-		this.errorReporting = errorReporting;
-	}
-
-	public short getErrorReportsSent() {
-		return errorReportsSent;
-	}
-
-	public void updateErrorReportsSent() {
-		this.errorReportsSent++;
-	}
-
-	public void setPluginDir(File f) {
-		pluginDir = f;
-	}
-
-	public File getPluginDir() {
-		return pluginDir;
+	public static void addStream(Stream s) {
+		streams.add(s);
 	}
 
 }

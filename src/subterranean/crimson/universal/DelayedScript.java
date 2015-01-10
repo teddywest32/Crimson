@@ -17,37 +17,50 @@
  *******************************************************************************/
 package subterranean.crimson.universal;
 
-
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 
 /** Reboots and runs a script **/
 public class DelayedScript {
 
 	public static void run(ArrayList<String> lines) {
-		File root = new File(Platform.tempDir + "crimson_" + new Date().getTime());
+		String scriptEnding = "";
+		switch (Platform.os) {
+		case WINDOWS:
+			scriptEnding = ".bat";
+			break;
+		default:
+			scriptEnding = ".sh";
+			break;
+
+		}
+
+		File root = Utilities.getTemp();
 		root.mkdirs();
-		File script = new File(root.getAbsoluteFile() + Platform.fileSeparator + "script" + Platform.scriptFilename);
+		File script = new File(root.getAbsoluteFile() + File.separator + "script" + scriptEnding);
 		try {
 			script.createNewFile();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return;
 		}
 		try {
 			PrintWriter pw = new PrintWriter(script);
 
-			if (Platform.windows) {
+			switch (Platform.os) {
+			case WINDOWS:
 				pw.println("PING -n 2 127.0.0.1>nul");
-
-			} else {
+				break;
+			default:
 				pw.println("sleep 1");
+				break;
+
 			}
+
 			for (String s : lines) {
 				pw.println(s);
 			}
@@ -60,14 +73,19 @@ public class DelayedScript {
 		}
 
 		try {
-			if (Platform.windows) {
-				Runtime.getRuntime().exec("cmd /c start /min " + Path.toWindows(script.getAbsolutePath()));
-			} else {
-				Runtime.getRuntime().exec("sh " + Path.toUnix(script.getAbsolutePath()));
+			switch (Platform.os) {
+			case WINDOWS:
+				Runtime.getRuntime().exec("cmd /c start /min " + script.getAbsolutePath());
+				break;
+			default:
+				Runtime.getRuntime().exec("sh " + script.getAbsolutePath());
+				break;
+
 			}
+
 		} catch (Exception e) {
 			// TODO: handle exception
-
+			Logger.add("Could not run script");
 		}
 
 		// shut this thing down

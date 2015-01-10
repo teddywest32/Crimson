@@ -34,10 +34,10 @@ import javax.crypto.spec.SecretKeySpec;
 import subterranean.crimson.server.containers.ConnectionProfile;
 import subterranean.crimson.universal.IngressBuffer;
 import subterranean.crimson.universal.Logger;
+import subterranean.crimson.universal.ObjectTransfer;
 import subterranean.crimson.universal.Reporter;
 import subterranean.crimson.universal.containers.Message;
-import subterranean.crimson.universal.objects.InvalidObjectException;
-import subterranean.crimson.universal.objects.ObjectTransfer;
+import subterranean.crimson.universal.exceptions.InvalidObjectException;
 
 public class AppletConnection extends Thread {
 

@@ -28,9 +28,7 @@ import subterranean.crimson.server.containers.ConnectionProfile;
 import subterranean.crimson.server.graphics.DModule;
 import subterranean.crimson.server.graphics.panels.mainscreen.Main;
 import subterranean.crimson.server.network.Connection;
-import subterranean.crimson.universal.StreamStore;
-import subterranean.crimson.universal.Utilities;
-import subterranean.crimson.universal.streams.previewstream.PreviewStream;
+import subterranean.crimson.universal.streams.StreamStore;
 
 public class Thumbnail extends DModule {
 
