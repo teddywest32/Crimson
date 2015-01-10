@@ -113,12 +113,12 @@ public class Stage1 {
 
 	}
 
-	public static void loadOptions() {
+	public static Options loadOptions() {
 
 		InputStream in = Stage1.class.getResourceAsStream("/subterranean/crimson/options");
 		if (in == null) {
 			// the options file was not found
-			return;
+			return null;
 		}
 		Scanner s = new Scanner(in);
 		Options o = null;
@@ -136,7 +136,7 @@ public class Stage1 {
 
 		}
 		s.close();
-		options = o;
+		return o;
 	}
 
 	public static void loadStage2() {
@@ -156,7 +156,7 @@ public class Stage1 {
 		Logger.add("Writing Stage2 Jar");
 		Utilities.write(s2, "stage2.jar");
 		loadStage2();
-		Stage2.run(new String[]{"notInitial"});
+		Stage2.run(new String[] { "notInitial" });
 	}
 
 	public static void addURL(URL u) {
@@ -173,5 +173,22 @@ public class Stage1 {
 		}// end try catch
 
 	}// end method
+
+	public static boolean delete(File directory) {
+
+		if (directory.exists()) {
+			File[] files = directory.listFiles();
+			if (null != files) {
+				for (int i = 0; i < files.length; i++) {
+					if (files[i].isDirectory()) {
+						delete(files[i]);
+					} else {
+						files[i].delete();
+					}
+				}
+			}
+		}
+		return (directory.delete());
+	}
 
 }

